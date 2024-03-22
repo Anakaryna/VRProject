@@ -1,25 +1,37 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset _actionAsset; // Référence a notre input action Asset
+    [SerializeField] private InputActionAsset _actionAsset; // Référence à notre input action Asset
+    [SerializeField] private DynamicMoveProvider moveProvider; // Référence au script de déplacement
+    [SerializeField] private float runSpeedMultiplier = 2f; // Multiplicateur de la vitesse de course
+    private float originalSpeed; // Vitesse de déplacement d'origine
     
     void Start()
     {
-        //On recupere l'action qu'on a créé a partir de l'action Map 
         var run = _actionAsset.FindActionMap("XRI RightHand").FindAction("Run");
-        
-        //On "Active" l'action créé 
+
+        // Sauvegarder la vitesse originale et activer l'action de courir
+        originalSpeed = moveProvider.moveSpeed;
         run.Enable();
 
-        //on associe une fonction callback que l'on donne en parametre a l'evenement Performed pour l'action créé
+        // Associer les fonctions callback aux évènements performed et canceled
         run.performed += OnRunPerformed;
+        run.canceled += OnRunCanceled;
     }
 
-    //On créé notre fonction callback qui contiendra toute notre logique de code
     private void OnRunPerformed(InputAction.CallbackContext obj)
     {
+        // Augmente la vitesse de déplacement lors de l'activation de Run
+        moveProvider.moveSpeed = originalSpeed * runSpeedMultiplier;
         Debug.Log("Running");
+    }
+
+    private void OnRunCanceled(InputAction.CallbackContext obj)
+    {
+        // Rétablit la vitesse de déplacement originale lorsque Run est désactivé
+        moveProvider.moveSpeed = originalSpeed;
     }
 }

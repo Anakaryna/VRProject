@@ -18,6 +18,8 @@ public class BuildingCreator : MonoBehaviour
 
     private void Apply()
     {
+        var originalRotation = gameObject.transform.rotation;
+        
         if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
         {
             return;
@@ -52,6 +54,8 @@ public class BuildingCreator : MonoBehaviour
         float lastX = 0;
         float lastY = 0;
         float lastZ = 0;
+
+        gameObject.transform.rotation = new Quaternion();
         
         for (int i = 0; i < countZ; ++i)
         {
@@ -106,6 +110,8 @@ public class BuildingCreator : MonoBehaviour
         box.size = new Vector3(width, height, weigth);
         box.center = new Vector3((width / 2) - (rendererTop.bounds.size.x / 2), (-height / 2) + rendererTop.bounds.size.y,
             (weigth / 2) - (rendererTop.bounds.size.z / 2));
+
+        gameObject.transform.rotation = originalRotation;
 
     }
 }

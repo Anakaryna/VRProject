@@ -10,6 +10,7 @@ public class TurretManager : MonoBehaviour
     public List<Transform> turretsCanonHeads;
     public Transform player;
     public int damping = 2;
+    public GameObject bullet;
     
     
     // Start is called before the first frame update
@@ -68,7 +69,7 @@ public class TurretManager : MonoBehaviour
 
                     turretInterface.updateCooldown(Time.deltaTime);
                     
-                    print(turretInterface.Cooldown);
+                    //print(turretInterface.Cooldown);
 
                     if (turretInterface.Cooldown <= 0)
                     {
@@ -95,13 +96,15 @@ public class TurretManager : MonoBehaviour
     {
         if (Physics.Raycast(turretPos, turret.forward, out RaycastHit hit2, 20f))
         {
-            if (hit2.collider.GameObject().TryGetComponent(out ICriticalHit critical))
-            {
-                critical.SendCritical(0);
-            } else if (hit2.collider.GameObject().TryGetComponent(out IDamagable damagable))
-            {
-                damagable.Hit(35);
-            }
+            var bullet1 = Instantiate(bullet);
+            bullet1.transform.position = turretPos;
+            var projectile = bullet1.GetComponent<IProjectile>();
+            projectile.TrailTime = 0.03f;
+            projectile.TrailWidth = 0.05f;
+            projectile.Origin = turretPos;
+            projectile.MaxDistance = 20;
+            projectile.Target = hit2.point;
+            projectile.Speed = 50;
         }
     }
 }

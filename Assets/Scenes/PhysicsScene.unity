@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458257731}
   - component: {fileID: 458257732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 704304596}
   - component: {fileID: 704304595}
   - component: {fileID: 704304598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 753813372}
   - component: {fileID: 753813371}
   - component: {fileID: 753813374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -585,6 +585,139 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+--- !u!1 &832661008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832661009}
+  - component: {fileID: 832661013}
+  - component: {fileID: 832661012}
+  - component: {fileID: 832661011}
+  - component: {fileID: 832661010}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &832661009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832661008}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.037, y: 0.496, z: 1.135}
+  m_LocalScale: {x: 1, y: 0.9908327, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1913767944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &832661010
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832661008}
+  serializedVersion: 4
+  m_Mass: 50000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &832661011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832661008}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &832661012
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832661008}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 553c64e97a048004d851824b63ebf9eb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &832661013
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832661008}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &845688851
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +729,7 @@ GameObject:
   - component: {fileID: 845688852}
   - component: {fileID: 845688854}
   - component: {fileID: 845688853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hand Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 958988865}
   - component: {fileID: 958988866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Physics Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,6 +930,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHead: {fileID: 753813370}
+  leftController: {fileID: 1397054599}
+  rightController: {fileID: 1967240365}
+  headJoint: {fileID: 1203949803}
+  leftHandJoint: {fileID: 1798748653}
+  rightHandJoint: {fileID: 845688853}
   bodyCollider: {fileID: 2134071279}
   bodyHeightMin: 0.5
   bodyHeightMax: 2
@@ -811,7 +949,7 @@ GameObject:
   - component: {fileID: 1203949802}
   - component: {fileID: 1203949804}
   - component: {fileID: 1203949803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +1115,7 @@ GameObject:
   - component: {fileID: 1397054602}
   - component: {fileID: 1397054601}
   - component: {fileID: 1397054600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1647,7 +1785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424270828}
   - component: {fileID: 1424270829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1701,7 +1839,7 @@ GameObject:
   - component: {fileID: 1798748651}
   - component: {fileID: 1798748652}
   - component: {fileID: 1798748653}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hand Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2035,6 +2173,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1873508224}
+  - {fileID: 832661009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967240364
@@ -2051,7 +2190,7 @@ GameObject:
   - component: {fileID: 1967240368}
   - component: {fileID: 1967240367}
   - component: {fileID: 1967240366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2721,7 +2860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2007270989}
   - component: {fileID: 2007270990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2891,7 +3030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061962009}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2926,7 +3065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2134071278}
   - component: {fileID: 2134071279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

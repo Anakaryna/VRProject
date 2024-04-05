@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PhysicRig : MonoBehaviour
 {
+    [Header("TRANSFORM")]
     public Transform playerHead;
     public Transform leftController;
     public Transform rightController;
-
+    [Header("CONFIGURABLEJOINT")]
     public ConfigurableJoint headJoint;
     public ConfigurableJoint leftHandJoint;
     public ConfigurableJoint rightHandJoint;
-
+    [Header("COLLIDER")]
     public CapsuleCollider bodyCollider;
-
+    [Header("SIZE")]
     public float bodyHeightMin = 0.5f;
     public float bodyHeightMax = 2;
 

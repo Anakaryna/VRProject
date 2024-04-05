@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class GrabPhysics : MonoBehaviour
 {
+    [Header("INPUT ACTION")]
     public InputActionProperty grabInputSource;
+    [Header("RADIUS")]
     public float radius = 0.1f;
+    [Header("LAYER")]
     public LayerMask grabLayer;
 
     private FixedJoint fixedJoint;

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class ContinuousMovementPhysics : MonoBehaviour
 {
+    [Header("PERSO")]
    public float speed = 1;
     public float turnSpeed = 60;
     public float jumpHeight = 1.5f;
@@ -17,20 +18,20 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
     public float minJumpWithHandSpeed = 2;
     public float maxJumpWithHandSpeed = 7;
-
+    [Header("INPUT ACTION")]
     public InputActionProperty moveInputSource;
     public InputActionProperty turnInputSource;
     public InputActionProperty jumpInputSource;
-
+    [Header("RIGID BODY")]
     public Rigidbody rb;
     public Rigidbody leftHandRB;
     public Rigidbody rightHandRB;
-
+    [Header("LAYER")]
     public LayerMask groundLayer;
-
+    [Header("CAMERA")]
     public Transform directionSource;
     public Transform turnSource;
-
+    [Header("COLLIDER")]
     public CapsuleCollider bodyCollider;
 
 

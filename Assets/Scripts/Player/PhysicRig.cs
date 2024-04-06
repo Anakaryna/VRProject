@@ -17,6 +17,7 @@ public class PhysicRig : MonoBehaviour
     [Header("SIZE")]
     public float bodyHeightMin = 0.5f;
     public float bodyHeightMax = 2;
+    
 
     // Update is called once per frame
     void FixedUpdate()

@@ -26,6 +26,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public Rigidbody rb;
     public Rigidbody leftHandRB;
     public Rigidbody rightHandRB;
+    public float heightWhenJumping = 2;
     [Header("LAYER")]
     public LayerMask groundLayer;
     [Header("CAMERA")]
@@ -34,7 +35,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     [Header("COLLIDER")]
     public CapsuleCollider bodyCollider;
 
-
+    private PhysicRig ph;
     private Vector2 inputMoveAxis;
     private float inputTurnAxis;
     private bool isGrounded;
@@ -44,6 +45,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     {
         inputMoveAxis = moveInputSource.action.ReadValue<Vector2>();
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
+        ph = GetComponent<PhysicRig>();
 
         bool inputJump = jumpInputSource.action.WasPressedThisFrame();
 
@@ -89,6 +91,16 @@ public class ContinuousMovementPhysics : MonoBehaviour
             Vector3 newPosition = q * (targetMovePosition - turnSource.position) + turnSource.position;
 
             rb.MovePosition(newPosition);
+        }
+
+        if (!isGrounded)
+        {
+            
+            ph.bodyHeightMax = 1;
+        }
+        else
+        {
+            ph.bodyHeightMax = heightWhenJumping;
         }
     }
 

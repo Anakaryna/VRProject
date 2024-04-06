@@ -23,14 +23,17 @@ public class GrabPhysics : MonoBehaviour
         {
             Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer, QueryTriggerInteraction.Ignore);
 
-            if(nearbyColliders.Length > 0)
+            if(nearbyColliders.Length > 0 && nearbyColliders[0].gameObject.TryGetComponent(out IGrabbable grabbable))
             {
+                
                 Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;
 
                 fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
+                
+                isGrabbing = grabbable.Grab(fixedJoint);
 
-                if(nearbyRigidbody)
+                /*if(nearbyRigidbody)
                 {
                     fixedJoint.connectedBody = nearbyRigidbody;
                     fixedJoint.connectedAnchor = nearbyRigidbody.transform.InverseTransformPoint(transform.position);
@@ -40,7 +43,7 @@ public class GrabPhysics : MonoBehaviour
                     fixedJoint.connectedAnchor = transform.position;
                 }
 
-                isGrabbing = true;
+                isGrabbing = true;*/
             }
         }
         else if(!isGrabButtonPressed && isGrabbing)

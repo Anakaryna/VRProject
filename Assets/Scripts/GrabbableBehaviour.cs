@@ -9,7 +9,7 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
 
     public Rigidbody body;
 
-    public bool Grab(FixedJoint fixedJoint)
+    public bool Grab(FixedJoint fixedJoint, Vector3 handsPosition)
     {
         fixedJoint.connectedBody = body;
         fixedJoint.connectedAnchor = body.transform.InverseTransformPoint(transform.position);

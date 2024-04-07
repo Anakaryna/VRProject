@@ -21,5 +21,5 @@ public interface ICriticalHit
 public interface IGrabbable
 {
     public bool Grabbed { get; set; }
-    public bool Grab(FixedJoint fixedJoint);
+    public bool Grab(FixedJoint fixedJoint, Vector3 handsPosition);
 }

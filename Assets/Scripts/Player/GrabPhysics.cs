@@ -31,7 +31,7 @@ public class GrabPhysics : MonoBehaviour
                 fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
                 
-                isGrabbing = grabbable.Grab(fixedJoint);
+                isGrabbing = grabbable.Grab(fixedJoint, transform.position);
 
                 /*if(nearbyRigidbody)
                 {

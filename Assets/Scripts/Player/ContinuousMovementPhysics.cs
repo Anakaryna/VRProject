@@ -18,22 +18,35 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
     public float minJumpWithHandSpeed = 2;
     public float maxJumpWithHandSpeed = 7;
+    
     [Header("INPUT ACTION")]
     public InputActionProperty moveInputSource;
     public InputActionProperty turnInputSource;
     public InputActionProperty jumpInputSource;
+    
     [Header("RIGID BODY")]
     public Rigidbody rb;
     public Rigidbody leftHandRB;
     public Rigidbody rightHandRB;
     public float heightWhenJumping = 2;
+    
     [Header("LAYER")]
     public LayerMask groundLayer;
+    
     [Header("CAMERA")]
     public Transform directionSource;
     public Transform turnSource;
+    
     [Header("COLLIDER")]
     public CapsuleCollider bodyCollider;
+    
+    [Header("RUN")]
+    public bool runWithHands = true;
+    public float minRunWithHandsSpeed = 1;
+    public float maxRunWithHandsSpeed = 5;
+    public float runMultiplier = 2; 
+
+    private bool isRunning = false;
 
     private PhysicRig ph;
     private Vector2 inputMoveAxis;
@@ -48,6 +61,11 @@ public class ContinuousMovementPhysics : MonoBehaviour
         ph = GetComponent<PhysicRig>();
 
         bool inputJump = jumpInputSource.action.WasPressedThisFrame();
+        
+        if (runWithHands)
+        {
+            RunWithHandsCheck();
+        }
 
         if (!jumpWithHand)
         {
@@ -113,4 +131,38 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
         return hasHit;
     }
+    
+    void RunWithHandsCheck()
+    {
+        // Calculer la vitesse et la direction verticale des mains
+        float leftHandVerticalSpeed = leftHandRB.velocity.y - rb.velocity.y;
+        float rightHandVerticalSpeed = rightHandRB.velocity.y - rb.velocity.y;
+
+        // Vérifier si une main se déplace vers le haut pendant que l'autre se déplace vers le bas
+        bool handsMovingAlternately = (leftHandVerticalSpeed > 0 && rightHandVerticalSpeed < 0) || (leftHandVerticalSpeed < 0 && rightHandVerticalSpeed > 0);
+
+        // Calculer la vitesse moyenne verticale des mains pour déterminer si elles se déplacent suffisamment vite
+        float averageVerticalHandSpeed = (Mathf.Abs(leftHandVerticalSpeed) + Mathf.Abs(rightHandVerticalSpeed)) / 2;
+
+        // Déterminer si le joueur court en se basant sur l'alternance et la vitesse verticale des mains 
+        if (handsMovingAlternately && averageVerticalHandSpeed > minRunWithHandsSpeed)
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
+
+        // Appliquer le multiplicateur de vitesse si le joueur est en train de courir et est au sol
+        if (isRunning && isGrounded)
+        {
+            speed *= runMultiplier;
+        }
+        else
+        {
+            speed /= runMultiplier;
+        }
+    }
+
 }

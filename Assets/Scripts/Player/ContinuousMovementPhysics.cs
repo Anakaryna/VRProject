@@ -47,11 +47,17 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public float runMultiplier = 2; 
 
     private bool isRunning = false;
+    private float baseSpeed;
 
     private PhysicRig ph;
     private Vector2 inputMoveAxis;
     private float inputTurnAxis;
     private bool isGrounded;
+    
+    private void Start()
+    {
+        baseSpeed = speed; 
+    }
 
     // Update is called once per frame
     void Update()
@@ -132,36 +138,27 @@ public class ContinuousMovementPhysics : MonoBehaviour
         return hasHit;
     }
     
-    void RunWithHandsCheck()
+     void RunWithHandsCheck()
     {
-        // Calculer la vitesse et la direction verticale des mains
         float leftHandVerticalSpeed = leftHandRB.velocity.y - rb.velocity.y;
         float rightHandVerticalSpeed = rightHandRB.velocity.y - rb.velocity.y;
 
-        // Vérifier si une main se déplace vers le haut pendant que l'autre se déplace vers le bas
         bool handsMovingAlternately = (leftHandVerticalSpeed > 0 && rightHandVerticalSpeed < 0) || (leftHandVerticalSpeed < 0 && rightHandVerticalSpeed > 0);
-
-        // Calculer la vitesse moyenne verticale des mains pour déterminer si elles se déplacent suffisamment vite
         float averageVerticalHandSpeed = (Mathf.Abs(leftHandVerticalSpeed) + Mathf.Abs(rightHandVerticalSpeed)) / 2;
 
-        // Déterminer si le joueur court en se basant sur l'alternance et la vitesse verticale des mains 
-        if (handsMovingAlternately && averageVerticalHandSpeed > minRunWithHandsSpeed)
-        {
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
+        bool wasRunning = isRunning; 
+        isRunning = handsMovingAlternately && averageVerticalHandSpeed > minRunWithHandsSpeed;
 
-        // Appliquer le multiplicateur de vitesse si le joueur est en train de courir et est au sol
-        if (isRunning && isGrounded)
+        if (isRunning != wasRunning) 
         {
-            speed *= runMultiplier;
-        }
-        else
-        {
-            speed /= runMultiplier;
+            if (isRunning)
+            {
+                speed = baseSpeed * runMultiplier; 
+            }
+            else
+            {
+                speed = baseSpeed; 
+            }
         }
     }
 

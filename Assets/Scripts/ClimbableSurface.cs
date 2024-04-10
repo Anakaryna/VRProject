@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrabbableBehaviour : MonoBehaviour, IGrabbable
+public class ClimbableSurface : MonoBehaviour, IGrabbable
 {
     
     public FixedJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
-
+    
     public FixedJoint Grab(Rigidbody body)
     {
         if (GrabbedFixedJoint)
@@ -18,7 +18,7 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedBody = this.body;
-        fixedJoint.connectedAnchor = transform.InverseTransformPoint(transform.position);
+        fixedJoint.connectedAnchor = transform.InverseTransformPoint(body.position);
         GrabbedFixedJoint = fixedJoint;
         return fixedJoint;
     }

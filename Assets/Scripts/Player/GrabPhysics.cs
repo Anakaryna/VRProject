@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class GrabPhysics : MonoBehaviour
 {
+    public Rigidbody body;
     [Header("INPUT ACTION")]
     public InputActionProperty grabInputSource;
     [Header("RADIUS")]
@@ -21,39 +23,28 @@ public class GrabPhysics : MonoBehaviour
 
         if(isGrabButtonPressed && !isGrabbing)
         {
-            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer, QueryTriggerInteraction.Ignore);
+            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer);
 
             if(nearbyColliders.Length > 0 && nearbyColliders[0].gameObject.TryGetComponent(out IGrabbable grabbable))
             {
                 
                 Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;
 
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
-                fixedJoint.autoConfigureConnectedAnchor = false;
+                fixedJoint = grabbable.Grab(body);
+
+                isGrabbing = fixedJoint;
                 
-                isGrabbing = grabbable.Grab(fixedJoint, transform.position);
-
-                /*if(nearbyRigidbody)
-                {
-                    fixedJoint.connectedBody = nearbyRigidbody;
-                    fixedJoint.connectedAnchor = nearbyRigidbody.transform.InverseTransformPoint(transform.position);
-                }
-                else
-                {
-                    fixedJoint.connectedAnchor = transform.position;
-                }
-
-                isGrabbing = true;*/
+                
             }
         }
         else if(!isGrabButtonPressed && isGrabbing)
         {
-            isGrabbing = false;
+            /*isGrabbing = false;
 
             if(fixedJoint)
             {
                 Destroy(fixedJoint);
-            }
+            }*/
         }
     }
 }

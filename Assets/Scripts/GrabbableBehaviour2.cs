@@ -7,7 +7,7 @@ using importedFunctions;
 public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
 {
     
-    public bool Grabbed { get; set; }
+    public FixedJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
     
@@ -16,14 +16,21 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
     public Transform snapPointA;
     public Transform snapPointB;
 
-    public bool Grab(FixedJoint fixedJoint, Vector3 handsPosition)
+    public FixedJoint Grab(Rigidbody body)
     {
-        body.isKinematic = true;
-        fixedJoint.connectedBody = body;
-        fixedJoint.connectedAnchor = body.transform.InverseTransformPoint(ClosestPointToLine.getClosestPointToLine(snapPointA.position, snapPointB.position, handsPosition));
-        body.isKinematic = false;
+        if (GrabbedFixedJoint)
+        {
+            return null;
+        }
+        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
+        fixedJoint.autoConfigureConnectedAnchor = false;
+        this.body.isKinematic = true;
+        fixedJoint.connectedBody = this.body;
+        fixedJoint.connectedAnchor = transform.InverseTransformPoint(ClosestPointToLine.getClosestPointToLine(snapPointA.position, snapPointB.position, body.position));
+        this.body.isKinematic = false;
         AudioSource.PlayClipAtPoint(audioClip, transform.position, 1);
-        return true;
+        GrabbedFixedJoint = fixedJoint;
+        return fixedJoint;
     }
     
     // Start is called before the first frame update

@@ -11,16 +11,16 @@ public class ClimbableSurface : MonoBehaviour, IGrabbable
     
     public FixedJoint Grab(Rigidbody body)
     {
-        if (GrabbedFixedJoint)
-        {
-            return null;
-        }
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedBody = this.body;
         fixedJoint.connectedAnchor = transform.InverseTransformPoint(body.position);
-        GrabbedFixedJoint = fixedJoint;
         return fixedJoint;
+    }
+
+    public void Release(FixedJoint fixedJoint)
+    {
+        
     }
     
     // Start is called before the first frame update

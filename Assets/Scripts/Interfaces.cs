@@ -22,4 +22,5 @@ public interface IGrabbable
 {
     public FixedJoint GrabbedFixedJoint { get; set; }
     public FixedJoint Grab(Rigidbody body);
+    public void Release(FixedJoint fixedJoint);
 }

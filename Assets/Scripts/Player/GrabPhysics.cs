@@ -15,6 +15,7 @@ public class GrabPhysics : MonoBehaviour
 
     private FixedJoint fixedJoint;
     private bool isGrabbing = false;
+    private IGrabbable grabedThing; // hey maybe you could do a recall mod thanks to that ?
 
     // Update is called once per frame
     void FixedUpdate()
@@ -33,18 +34,20 @@ public class GrabPhysics : MonoBehaviour
                 fixedJoint = grabbable.Grab(body);
 
                 isGrabbing = fixedJoint;
-                
-                
+
+                grabedThing = grabbable;
+
             }
         }
         else if(!isGrabButtonPressed && isGrabbing)
         {
-            /*isGrabbing = false;
+            isGrabbing = false;
 
             if(fixedJoint)
             {
+                grabedThing.Release(fixedJoint);
                 Destroy(fixedJoint);
-            }*/
+            }
         }
     }
 }

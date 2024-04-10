@@ -32,6 +32,11 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
         GrabbedFixedJoint = fixedJoint;
         return fixedJoint;
     }
+
+    public void Release(FixedJoint fixedJoint)
+    {
+        
+    }
     
     // Start is called before the first frame update
     void Start()

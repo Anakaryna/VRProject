@@ -20,7 +20,7 @@ public interface ICriticalHit
 
 public interface IGrabbable
 {
-    public FixedJoint GrabbedFixedJoint { get; set; }
-    public FixedJoint Grab(Rigidbody body);
-    public void Release(FixedJoint fixedJoint);
+    public ConfigurableJoint GrabbedFixedJoint { get; set; }
+    public ConfigurableJoint Grab(Rigidbody body);
+    public void Release(ConfigurableJoint fixedJoint);
 }

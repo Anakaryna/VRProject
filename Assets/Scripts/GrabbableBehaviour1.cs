@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
 {
     
-    public FixedJoint GrabbedFixedJoint { get; set; }
+    public ConfigurableJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
     
@@ -13,13 +13,13 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
 
     public Transform snapPoint;
 
-    public FixedJoint Grab(Rigidbody body)
+    public ConfigurableJoint Grab(Rigidbody body)
     {
         if (GrabbedFixedJoint)
         {
             return null;
         }
-        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
+        var fixedJoint = body.gameObject.AddComponent<ConfigurableJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
         fixedJoint.connectedBody = this.body;
@@ -30,7 +30,7 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint)
+    public void Release(ConfigurableJoint fixedJoint)
     {
         
     }

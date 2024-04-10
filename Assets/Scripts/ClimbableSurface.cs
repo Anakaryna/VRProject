@@ -5,20 +5,20 @@ using UnityEngine;
 public class ClimbableSurface : MonoBehaviour, IGrabbable
 {
     
-    public FixedJoint GrabbedFixedJoint { get; set; }
+    public ConfigurableJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
     
-    public FixedJoint Grab(Rigidbody body)
+    public ConfigurableJoint Grab(Rigidbody body)
     {
-        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
+        var fixedJoint = body.gameObject.AddComponent<ConfigurableJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedBody = this.body;
         fixedJoint.connectedAnchor = transform.InverseTransformPoint(body.position);
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint)
+    public void Release(ConfigurableJoint fixedJoint)
     {
         
     }

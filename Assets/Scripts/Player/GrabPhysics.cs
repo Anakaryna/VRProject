@@ -13,7 +13,7 @@ public class GrabPhysics : MonoBehaviour
     [Header("LAYER")]
     public LayerMask grabLayer;
 
-    private FixedJoint fixedJoint;
+    private ConfigurableJoint fixedJoint;
     private bool isGrabbing = false;
     private IGrabbable grabedThing; // hey maybe you could do a recall mod thanks to that ?
 

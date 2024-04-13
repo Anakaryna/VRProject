@@ -26,11 +26,12 @@ public class PhysicRig : MonoBehaviour
     public GameObject pocket3;
     public GameObject pocket4;
 
-    [Header("Pockets Position Offsets")]
+    [Header("Pockets Settings")]
     [Range(0,1)] public float sideHeightMultiplier;
     [Range(0,5)] public float sideSpacing;
     [Range(0,1)] public float shoulderMultiplier;
     [Range(0,5)] public float shoulderSpacing;
+    public float lag;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -52,15 +53,22 @@ public class PhysicRig : MonoBehaviour
         pocket4.transform.localPosition = new Vector3(cameraPosition.localPosition.x - shoulderSpacing, cameraPosition.localPosition.y*shoulderMultiplier, cameraPosition.localPosition.z);
 
 
+        Quaternion head = Quaternion.Euler(0, cameraPosition.rotation.eulerAngles.y, 0);
+        Quaternion pockets = Quaternion.Euler(0, parentPockets.transform.rotation.eulerAngles.y, 0);
 
-        print(Mathf.Abs(cameraPosition.rotation.eulerAngles.y - parentPockets.transform.rotation.eulerAngles.y)-180);
-        if (Mathf.Abs(cameraPosition.rotation.eulerAngles.y - parentPockets.transform.rotation.eulerAngles.y) > 200)
+        float distance = Quaternion.Angle(head, pockets);
+
+        if (distance > lag)
         {
-            print(cameraPosition.rotation.eulerAngles.y);
-            print(parentPockets.transform.rotation.eulerAngles.y);
-            print(cameraPosition.rotation.eulerAngles.y - parentPockets.transform.rotation.eulerAngles.y);
-            parentPockets.transform.rotation = Quaternion.Euler(0, cameraPosition.rotation.eulerAngles.y, 0);
+            if (lag < 2)
+            {
+                parentPockets.transform.rotation = Quaternion.RotateTowards(head, pockets, 1);
+            }
+            else
+            {
+                parentPockets.transform.rotation = Quaternion.RotateTowards(head, pockets, lag-1);
+            }
+            
         }
-        
     }
 }

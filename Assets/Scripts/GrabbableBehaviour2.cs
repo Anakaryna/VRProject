@@ -6,15 +6,14 @@ using importedFunctions;
 using Unity.Mathematics;
 
 using importedFunctions;
+using UnityEditor.SceneManagement;
 
 public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
 {
     
-    public ConfigurableJoint GrabbedFixedJoint { get; set; }
+    public FixedJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
-    
-    public AudioClip audioClip;
 
     public Transform snapPointA;
     public Transform snapPointB;
@@ -22,21 +21,16 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
 
     public Vector3 rotationMask;
 
-    public ConfigurableJoint Grab(Rigidbody body)
+    public FixedJoint Grab(Rigidbody body)
     {
         if (GrabbedFixedJoint)
         {
             return null;
         }
-        var fixedJoint = body.gameObject.AddComponent<ConfigurableJoint>();
+        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
-        fixedJoint.xMotion = ConfigurableJointMotion.Locked;
-        fixedJoint.yMotion = ConfigurableJointMotion.Locked;
-        fixedJoint.zMotion = ConfigurableJointMotion.Locked;
-        fixedJoint.angularXMotion = ConfigurableJointMotion.Locked;
-        fixedJoint.angularYMotion = ConfigurableJointMotion.Locked;
-        fixedJoint.angularZMotion = ConfigurableJointMotion.Locked;
+        fixedJoint.massScale = 0.1f;
         print(snapPointA.position);
         print(snapPointB.position);
         print(body.position);
@@ -49,12 +43,11 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
         fixedJoint.connectedAnchor = pos;
         //print(transform.InverseTransformPoint(ClosestPointToLine.getClosestPointToLine(snapPointA.position, snapPointB.position, body.position)));
         this.body.isKinematic = false;
-        AudioSource.PlayClipAtPoint(audioClip, transform.position, 1);
         GrabbedFixedJoint = fixedJoint;
         return fixedJoint;
     }
 
-    public void Release(ConfigurableJoint fixedJoint)
+    public void Release(FixedJoint fixedJoint)
     {
         
     }

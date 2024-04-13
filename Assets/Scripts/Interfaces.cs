@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public interface IDamagable
@@ -20,7 +21,7 @@ public interface ICriticalHit
 
 public interface IGrabbable
 {
-    public ConfigurableJoint GrabbedFixedJoint { get; set; }
-    public ConfigurableJoint Grab(Rigidbody body);
-    public void Release(ConfigurableJoint fixedJoint);
+    public FixedJoint GrabbedFixedJoint { get; set; }
+    public FixedJoint Grab(Rigidbody body);
+    public void Release(FixedJoint fixedJoint);
 }

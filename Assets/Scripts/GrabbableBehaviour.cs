@@ -5,17 +5,17 @@ using UnityEngine;
 public class GrabbableBehaviour : MonoBehaviour, IGrabbable
 {
     
-    public ConfigurableJoint GrabbedFixedJoint { get; set; }
+    public FixedJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
 
-    public ConfigurableJoint Grab(Rigidbody body)
+    public FixedJoint Grab(Rigidbody body)
     {
         if (GrabbedFixedJoint)
         {
             return null;
         }
-        var fixedJoint = body.gameObject.AddComponent<ConfigurableJoint>();
+        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedBody = this.body;
         fixedJoint.connectedAnchor = transform.InverseTransformPoint(transform.position);
@@ -23,7 +23,7 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
         return fixedJoint;
     }
 
-    public void Release(ConfigurableJoint fixedJoint)
+    public void Release(FixedJoint fixedJoint)
     {
         
     }

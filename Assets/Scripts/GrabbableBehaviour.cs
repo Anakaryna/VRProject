@@ -15,6 +15,7 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
         {
             return null;
         }
+        
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedBody = this.body;

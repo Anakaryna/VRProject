@@ -23,7 +23,9 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
         fixedJoint.connectedBody = this.body;
+        
         fixedJoint.connectedAnchor = transform.InverseTransformPoint(snapPoint.position);
+        
         this.body.isKinematic = false;
         AudioSource.PlayClipAtPoint(audioClip, transform.position, 1);
         GrabbedFixedJoint = fixedJoint;

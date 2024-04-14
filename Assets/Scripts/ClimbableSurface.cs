@@ -13,8 +13,7 @@ public class ClimbableSurface : MonoBehaviour, IGrabbable
     {
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
-        fixedJoint.connectedBody = this.body;
-        fixedJoint.connectedAnchor = transform.InverseTransformPoint(body.position);
+        fixedJoint.connectedAnchor = transform.position;
         return fixedJoint;
     }
 

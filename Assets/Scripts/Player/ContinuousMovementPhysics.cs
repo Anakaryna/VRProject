@@ -120,7 +120,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
         if (!isGrounded)
         {
             
-            ph.bodyHeightMax = 1;
+            ph.bodyHeightMax = 0.5f;
         }
         else
         {

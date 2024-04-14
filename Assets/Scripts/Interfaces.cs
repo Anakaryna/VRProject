@@ -25,3 +25,10 @@ public interface IGrabbable
     public FixedJoint Grab(Rigidbody body);
     public void Release(FixedJoint fixedJoint);
 }
+
+public interface IStorable
+{
+    public FixedJoint Stored { get; set; }
+    public FixedJoint Store(Vector3 releasePoint, GameObject storage);
+    public bool StorageRelease();
+}

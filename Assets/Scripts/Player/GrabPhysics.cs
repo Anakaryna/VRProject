@@ -26,7 +26,28 @@ public class GrabPhysics : MonoBehaviour
         {
             Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer);
 
-            if(nearbyColliders.Length > 0 && nearbyColliders[0].gameObject.TryGetComponent(out IGrabbable grabbable))
+            bool stored;
+
+            if (nearbyColliders.Length > 0 && nearbyColliders[0].gameObject.TryGetComponent(out IStorable storable))
+            {
+
+                if (storable.Stored)
+                {
+                    stored = !storable.StorageRelease();
+                }
+                else
+                {
+                    stored = false;
+                }
+                
+                
+            }
+            else
+            {
+                stored = false;
+            }
+            
+            if(nearbyColliders.Length > 0 && !stored && nearbyColliders[0].gameObject.TryGetComponent(out IGrabbable grabbable))
             {
                 
                 Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;

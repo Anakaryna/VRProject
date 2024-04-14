@@ -47,10 +47,13 @@ public class PhysicRig : MonoBehaviour
 
         headJoint.targetPosition = playerHead.localPosition;
 
-        pocket1.transform.localPosition = new Vector3(cameraPosition.localPosition.x + sideSpacing, cameraPosition.localPosition.y*sideHeightMultiplier, cameraPosition.localPosition.z);
-        pocket2.transform.localPosition = new Vector3(cameraPosition.localPosition.x - sideSpacing, cameraPosition.localPosition.y*sideHeightMultiplier, cameraPosition.localPosition.z);
-        pocket3.transform.localPosition = new Vector3(cameraPosition.localPosition.x + shoulderSpacing, cameraPosition.localPosition.y*shoulderMultiplier, cameraPosition.localPosition.z);
-        pocket4.transform.localPosition = new Vector3(cameraPosition.localPosition.x - shoulderSpacing, cameraPosition.localPosition.y*shoulderMultiplier, cameraPosition.localPosition.z);
+        parentPockets.transform.localPosition =
+            new Vector3(cameraPosition.localPosition.x, 0, cameraPosition.localPosition.z);
+
+        pocket1.transform.localPosition = new Vector3(sideSpacing, cameraPosition.position.y*sideHeightMultiplier, 0);
+        pocket2.transform.localPosition = new Vector3( - sideSpacing, cameraPosition.position.y*sideHeightMultiplier, 0);
+        pocket3.transform.localPosition = new Vector3( shoulderSpacing, cameraPosition.position.y*shoulderMultiplier, 0);
+        pocket4.transform.localPosition = new Vector3( - shoulderSpacing, cameraPosition.position.y*shoulderMultiplier, 0);
 
 
         Quaternion head = Quaternion.Euler(0, cameraPosition.rotation.eulerAngles.y, 0);

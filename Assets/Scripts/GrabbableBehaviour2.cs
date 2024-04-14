@@ -30,7 +30,6 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
-        fixedJoint.massScale = 0.1f;
         print(snapPointA.position);
         print(snapPointB.position);
         print(body.position);

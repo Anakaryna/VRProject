@@ -1341,7 +1341,7 @@ MonoBehaviour:
   Wall_Dist: 1
   Wallrun_check: 0
   min_jump: 0
-  Wallrun_Velocity: 200
+  Wallrun_Velocity: 40
   gravity_force: 10
   Wallrun_Time: 2
   exit_time: 0.7

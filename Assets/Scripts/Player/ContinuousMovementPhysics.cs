@@ -38,7 +38,8 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private PhysicRig ph;
     private Vector2 inputMoveAxis;
     private float inputTurnAxis;
-    private bool isGrounded;
+    public bool isGrounded;
+    public bool wallrunning;
 
     // Update is called once per frame
     void Update()
@@ -74,7 +75,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     {
         isGrounded = CheckIfGrounded();
 
-        if (!onlyMoveIfGrounded || (onlyMoveIfGrounded && isGrounded))
+        if (!onlyMoveIfGrounded && !wallrunning || (onlyMoveIfGrounded && isGrounded))
         {
             Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
             Vector3 direction = yaw * new Vector3(inputMoveAxis.x, 0, inputMoveAxis.y);
@@ -95,8 +96,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
         if (!isGrounded)
         {
-            
-            ph.bodyHeightMax = 1;
+            ph.bodyHeightMax = 0.5f;
         }
         else
         {

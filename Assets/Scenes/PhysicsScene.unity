@@ -775,6 +775,9 @@ MonoBehaviour:
   body: {fileID: 221787783}
   audioClip: {fileID: 8300000, guid: a9609a0fc3b7a2b4cb2d412eff8eb681, type: 3}
   snapPoint: {fileID: 1061646237}
+  excludingGrabLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
 --- !u!65 &221787782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3131,6 +3134,9 @@ MonoBehaviour:
   snapPointB: {fileID: 537850795}
   rotationPoint: {fileID: 1975452693}
   rotationMask: {x: 1, y: 1, z: 1}
+  excludingGrabLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
 --- !u!54 &1000328093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3736,6 +3742,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1462670740}
+  excludingGrabLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
 --- !u!1001 &1485743488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4363,6 +4372,9 @@ MonoBehaviour:
   snapPointB: {fileID: 106850592}
   rotationPoint: {fileID: 1771769136}
   rotationMask: {x: 1, y: 1, z: 1}
+  excludingGrabLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
 --- !u!4 &1624120617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d17ca51874af092408acab74596db540,

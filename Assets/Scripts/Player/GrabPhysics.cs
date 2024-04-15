@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class GrabPhysics : MonoBehaviour
 {
+    public Rigidbody body;
     [Header("INPUT ACTION")]
     public InputActionProperty grabInputSource;
     [Header("RADIUS")]
@@ -13,6 +15,7 @@ public class GrabPhysics : MonoBehaviour
 
     private FixedJoint fixedJoint;
     private bool isGrabbing = false;
+    private IGrabbable grabedThing; // hey maybe you could do a recall mod thanks to that ?
 
     // Update is called once per frame
     void FixedUpdate()
@@ -21,26 +24,40 @@ public class GrabPhysics : MonoBehaviour
 
         if(isGrabButtonPressed && !isGrabbing)
         {
-            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer, QueryTriggerInteraction.Ignore);
+            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer);
 
-            if(nearbyColliders.Length > 0)
+            bool stored;
+
+            if (nearbyColliders.Length > 0 && nearbyColliders[0].gameObject.TryGetComponent(out IStorable storable))
             {
-                Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;
 
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
-                fixedJoint.autoConfigureConnectedAnchor = false;
-
-                if(nearbyRigidbody)
+                if (storable.Stored)
                 {
-                    fixedJoint.connectedBody = nearbyRigidbody;
-                    fixedJoint.connectedAnchor = nearbyRigidbody.transform.InverseTransformPoint(transform.position);
+                    stored = !storable.StorageRelease();
                 }
                 else
                 {
-                    fixedJoint.connectedAnchor = transform.position;
+                    stored = false;
                 }
+                
+                
+            }
+            else
+            {
+                stored = false;
+            }
+            
+            if(nearbyColliders.Length > 0 && !stored && nearbyColliders[0].gameObject.TryGetComponent(out IGrabbable grabbable))
+            {
+                
+                Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;
 
-                isGrabbing = true;
+                fixedJoint = grabbable.Grab(body);
+
+                isGrabbing = fixedJoint;
+
+                grabedThing = grabbable;
+
             }
         }
         else if(!isGrabButtonPressed && isGrabbing)
@@ -49,6 +66,7 @@ public class GrabPhysics : MonoBehaviour
 
             if(fixedJoint)
             {
+                grabedThing.Release(fixedJoint, transform.position);
                 Destroy(fixedJoint);
             }
         }

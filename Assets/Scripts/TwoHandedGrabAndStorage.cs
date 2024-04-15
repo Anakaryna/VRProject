@@ -12,21 +12,24 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
 
     public Transform snapPointA;
     public Transform snapPointB;
+    public Transform pocketRotation;
 
     public Vector3 rotationMask;
 
     public LayerMask storageLayer;
+    public LayerMask excludingGrabLayerMask;
     
     public FixedJoint Stored { get; set; }
 
     public FixedJoint Store(Vector3 releasePoint, GameObject storage)
     {
-        body.excludeLayers = ~0;
+        body.excludeLayers = excludingGrabLayerMask;
         body.mass = 0;
         var fixedJoint = storage.AddComponent<FixedJoint>();
-        fixedJoint.massScale = 0;
         fixedJoint.autoConfigureConnectedAnchor = false;
-        fixedJoint.connectedAnchor = storage.transform.position;
+        transform.rotation = SnapRotation.getSnapRotation(pocketRotation.localRotation, transform.rotation,
+            storage.transform.rotation, new Vector3(1, 1, 1));
+        fixedJoint.connectedAnchor = snapPointA.localPosition;
         fixedJoint.connectedBody = body;
         Stored = fixedJoint;
         return fixedJoint;
@@ -34,9 +37,7 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
 
     public bool StorageRelease()
     {
-        body.mass = 1;
         Destroy(Stored);
-        body.excludeLayers = 0;
         return true;
     }
 
@@ -46,9 +47,13 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
         {
             return null;
         }
+
+        this.body.excludeLayers = excludingGrabLayerMask;
+        this.body.mass = 0;
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
+        
         var distA = Vector3.Distance(body.position, snapPointA.position);
         var distB = Vector3.Distance(body.position, snapPointB.position);
         Vector3 pos;
@@ -74,13 +79,18 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint)
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
     {
-        Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, 5, storageLayer);
+        Collider[] nearbyColliders = Physics.OverlapSphere(handsPosition, 0.2f, storageLayer);
         if (nearbyColliders.Length > 0 && nearbyColliders[0].CompareTag("BodyStorage"))
         {
             print(nearbyColliders[0]);
-            Store(fixedJoint.connectedAnchor, nearbyColliders[0].gameObject);
+            Store(transform.InverseTransformPoint(handsPosition), nearbyColliders[0].gameObject);
+        }
+        else
+        {
+            body.excludeLayers = 0;
+            body.mass = 1;
         }
     }
     

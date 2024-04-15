@@ -39,7 +39,7 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint)
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
     {
         
     }

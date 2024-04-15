@@ -23,7 +23,7 @@ public interface IGrabbable
 {
     public FixedJoint GrabbedFixedJoint { get; set; }
     public FixedJoint Grab(Rigidbody body);
-    public void Release(FixedJoint fixedJoint);
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition);
 }
 
 public interface IStorable

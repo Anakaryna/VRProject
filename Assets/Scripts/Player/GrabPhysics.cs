@@ -66,7 +66,7 @@ public class GrabPhysics : MonoBehaviour
 
             if(fixedJoint)
             {
-                grabedThing.Release(fixedJoint);
+                grabedThing.Release(fixedJoint, transform.position);
                 Destroy(fixedJoint);
             }
         }

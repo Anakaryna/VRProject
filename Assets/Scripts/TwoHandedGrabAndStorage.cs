@@ -24,7 +24,9 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
     public FixedJoint Store(Vector3 releasePoint, GameObject storage)
     {
         body.excludeLayers = excludingGrabLayerMask;
-        body.mass = 0;
+        body.automaticCenterOfMass = false;
+        body.centerOfMass = snapPointA.localPosition;
+        body.mass = 0f;
         var fixedJoint = storage.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         transform.rotation = SnapRotation.getSnapRotation(pocketRotation.localRotation, transform.rotation,
@@ -49,7 +51,9 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
         }
 
         this.body.excludeLayers = excludingGrabLayerMask;
-        this.body.mass = 0;
+        this.body.automaticCenterOfMass = false;
+        this.body.centerOfMass = snapPointA.localPosition;
+        this.body.mass = 0.1f;
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         this.body.isKinematic = true;
@@ -89,6 +93,7 @@ public class TwoHandedGrabAndStorage : MonoBehaviour, IGrabbable, IStorable
         }
         else
         {
+            body.automaticCenterOfMass = true;
             body.excludeLayers = 0;
             body.mass = 1;
         }

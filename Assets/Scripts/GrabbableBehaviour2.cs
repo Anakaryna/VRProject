@@ -11,9 +11,15 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
     public Transform snapPointA;
     public Transform snapPointB;
     public Transform rotationPoint;
+    public Transform inverseRotationPoint;
 
     public Vector3 rotationMask;
     public LayerMask excludingGrabLayerMask;
+    
+    public void putMass()
+    {
+        body.mass = 0.2f;
+    }
     
     public FixedJoint Grab(Rigidbody body)
     {
@@ -22,23 +28,10 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
             return null;
         }
 
-        this.body.excludeLayers = excludingGrabLayerMask;
-        this.body.automaticCenterOfMass = false;
-        Vector3 pos = ClosestPointToLine.getClosestPointToLine(snapPointA.localPosition, snapPointB.localPosition,
-            transform.InverseTransformPoint(body.position));
-        this.body.centerOfMass = pos;
-        this.body.mass = 0.1f;
-        var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
-        fixedJoint.autoConfigureConnectedAnchor = false;
-        this.body.isKinematic = true;
-        
-        transform.rotation = SnapRotation.getSnapRotation(rotationPoint.localRotation, transform.rotation, body.rotation, rotationMask);
-        fixedJoint.connectedBody = this.body;
-        fixedJoint.connectedAnchor = pos;
-        
-        this.body.isKinematic = false;
-        GrabbedFixedJoint = fixedJoint;
-        return fixedJoint;
+        GrabbedFixedJoint = GrabAndStorage.grabAutoFullSnapLine(this.body, body, snapPointA, snapPointB, rotationPoint, inverseRotationPoint, rotationMask,
+            excludingGrabLayerMask);
+        Invoke(nameof(putMass), 0.1f);
+        return GrabbedFixedJoint;
     }
 
     public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
@@ -46,17 +39,5 @@ public class GrabbableBehaviour2 : MonoBehaviour, IGrabbable
         body.automaticCenterOfMass = true;
         body.excludeLayers = 0;
         body.mass = 1;
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

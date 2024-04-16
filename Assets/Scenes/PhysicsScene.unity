@@ -1281,6 +1281,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341589888}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &396834257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 396834258}
+  m_Layer: 0
+  m_Name: inverseRotationPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &396834258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396834257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.005, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1000328091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1001 &416954526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1356,6 +1387,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1771769136}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d17ca51874af092408acab74596db540,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1140581250}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d17ca51874af092408acab74596db540,
         type: 3}
       insertIndex: -1
@@ -2379,10 +2414,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 719390875}
-  snapPointA: {fileID: 1774839657}
-  snapPointB: {fileID: 1804019293}
+  snapPoints:
+  - {fileID: 1774839657}
+  - {fileID: 1804019293}
   pocketRotation: {fileID: 116116731}
-  rotationMask: {x: 0, y: 0, z: 0}
+  rotationMask: {x: 1, y: 1, z: 1}
   storageLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -3119,6 +3155,7 @@ Transform:
   m_Children:
   - {fileID: 1236260637}
   - {fileID: 1975452693}
+  - {fileID: 396834258}
   - {fileID: 537850795}
   m_Father: {fileID: 1913767944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -3138,6 +3175,7 @@ MonoBehaviour:
   snapPointA: {fileID: 1236260637}
   snapPointB: {fileID: 537850795}
   rotationPoint: {fileID: 1975452693}
+  inverseRotationPoint: {fileID: 396834258}
   rotationMask: {x: 1, y: 1, z: 1}
   excludingGrabLayerMask:
     serializedVersion: 2
@@ -3339,6 +3377,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 221787780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1140581249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140581250}
+  m_Layer: 0
+  m_Name: inverseRotationPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1140581250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140581249}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.407}
+  m_LocalScale: {x: 1, y: 5.4000025, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624120617}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &1149095758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4376,7 +4445,8 @@ MonoBehaviour:
   snapPointA: {fileID: 1334427523}
   snapPointB: {fileID: 106850592}
   rotationPoint: {fileID: 1771769136}
-  rotationMask: {x: 1, y: 1, z: 1}
+  inverseRotationPoint: {fileID: 1140581250}
+  rotationMask: {x: 1, y: 1, z: 0}
   excludingGrabLayerMask:
     serializedVersion: 2
     m_Bits: 576

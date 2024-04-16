@@ -1,4 +1,9 @@
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace importedFunctions
@@ -52,9 +57,9 @@ namespace importedFunctions
 
     public class SnapRotation
     {
-        public static Quaternion getSnapRotation(Quaternion rotationTarget, Quaternion objectRotation, Quaternion handRotation, Vector3 rotationMask)
+        public static Quaternion getSnapRotation(Quaternion rotationTarget, Quaternion objectRotation, Quaternion grabberRotation, Vector3 rotationMask)
         {
-            Vector3 targetRotation = (handRotation * rotationTarget).eulerAngles;
+            Vector3 targetRotation = (grabberRotation * rotationTarget).eulerAngles;
             if (rotationMask.x == 0)
             {
                 targetRotation.x = objectRotation.eulerAngles.x;
@@ -73,7 +78,7 @@ namespace importedFunctions
 
     public class GrabAndStorage
     {
-        public static FixedJoint grabAutomaticFullSnapPoint(Rigidbody grabbedBody, float grabbedMass, Rigidbody grabbingBody, Transform snapPosition, Transform snapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
+        public static FixedJoint grabAutomaticFullSnapPoint(Rigidbody grabbedBody, Rigidbody grabbingBody, Transform snapPosition, Transform snapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
         {
             grabbedBody.excludeLayers = excludingGrabLayerMask;
             grabbedBody.automaticCenterOfMass = false;
@@ -94,7 +99,59 @@ namespace importedFunctions
             return fixedJoint;
         }
 
-        public static FixedJoint storeAutomaticFullSnapPoint(Rigidbody grabbedBody, float grabbedMass, GameObject storage, Transform snapPosition, Transform pocketSnapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
+        public static FixedJoint grabAutoFullSnapLine(Rigidbody grabbedBody, Rigidbody grabbingBody,
+            Transform snapPositionA, Transform snapPositionB, Transform snapRotation, Transform snapRotationInverse, Vector3 rotationFilter,
+            LayerMask excludingGrabLayerMask)
+        {
+            
+            
+            Vector3 pos = ClosestPointToLine.getClosestPointToLine(snapPositionA.localPosition, snapPositionB.localPosition,
+                grabbedBody.transform.InverseTransformPoint(grabbingBody.position));
+            grabbedBody.excludeLayers = excludingGrabLayerMask;
+            grabbedBody.automaticCenterOfMass = false;
+            grabbedBody.centerOfMass = pos;
+            grabbedBody.mass = 0f;
+            var fixedJoint = grabbingBody.gameObject.AddComponent<FixedJoint>();
+            fixedJoint.autoConfigureConnectedAnchor = false;
+            grabbedBody.isKinematic = true;
+
+            if (Quaternion.Angle(snapRotation.rotation, grabbingBody.rotation) >
+                Quaternion.Angle(snapRotationInverse.rotation, grabbingBody.rotation))
+            {
+                grabbedBody.transform.rotation = SnapRotation.getSnapRotation(snapRotation.localRotation, grabbedBody.transform.rotation, grabbingBody.rotation,
+                    rotationFilter);
+            }
+            else
+            {
+                grabbedBody.transform.rotation = SnapRotation.getSnapRotation(snapRotationInverse.localRotation, grabbedBody.transform.rotation, grabbingBody.rotation,
+                    rotationFilter);
+            }
+        
+            fixedJoint.connectedBody = grabbedBody;
+            fixedJoint.connectedAnchor = pos;
+        
+            grabbedBody.isKinematic = false;
+            return fixedJoint;
+        }
+
+        public static Transform getClosestPosition(List<Transform> points, Transform p)
+        {
+            float distance = Vector3.Distance(points[0].position, p.position);
+            Transform shortest = points[0];
+            foreach (var point in points)
+            {
+                float d = Vector3.Distance(point.position, p.position);
+                if (d < distance)
+                {
+                    distance = d;
+                    shortest = point;
+                }
+            }
+
+            return shortest;
+        }
+
+        public static FixedJoint storeAutomaticFullSnapPoint(Rigidbody grabbedBody, GameObject storage, Transform snapPosition, Transform pocketSnapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
         {
             grabbedBody.excludeLayers = excludingGrabLayerMask;
             grabbedBody.automaticCenterOfMass = false;
@@ -108,6 +165,7 @@ namespace importedFunctions
             fixedJoint.connectedBody = grabbedBody;
             return fixedJoint;
         }
+
         
         
     }

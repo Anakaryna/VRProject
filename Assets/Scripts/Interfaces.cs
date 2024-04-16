@@ -30,5 +30,6 @@ public interface IStorable
 {
     public FixedJoint Stored { get; set; }
     public FixedJoint Store(Vector3 releasePoint, GameObject storage);
+
     public bool StorageRelease();
 }

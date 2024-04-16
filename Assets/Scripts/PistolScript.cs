@@ -15,6 +15,11 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
     public LayerMask storageLayer;
     public LayerMask excludingGrabLayerMask;
     
+    public void putMass()
+    {
+        mybody.mass = 0.2f;
+    }
+    
     public FixedJoint GrabbedFixedJoint { get; set; }
 
     public FixedJoint Grab(Rigidbody body)
@@ -24,7 +29,8 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
             return null;
         }
         
-        GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(mybody, 0.1f, body, snapPosition, snapRotation, new Vector3(1,1,1), excludingGrabLayerMask);
+        GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(mybody, body, snapPosition, snapRotation, new Vector3(1,1,1), excludingGrabLayerMask);
+        Invoke(nameof(putMass), 0.1f);
         return GrabbedFixedJoint;
     }
 
@@ -49,7 +55,7 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
 
     public FixedJoint Store(Vector3 releasePoint, GameObject storage)
     {
-        Stored = GrabAndStorage.storeAutomaticFullSnapPoint(mybody, 0f, storage, snapPosition, pocketSnapRotation, new Vector3(1,1,1), excludingGrabLayerMask);
+        Stored = GrabAndStorage.storeAutomaticFullSnapPoint(mybody, storage, snapPosition, pocketSnapRotation, new Vector3(1,1,1), excludingGrabLayerMask);
         return Stored;
     }
 

@@ -70,5 +70,46 @@ namespace importedFunctions
             return Quaternion.Euler(targetRotation);
         }
     }
+
+    public class GrabAndStorage
+    {
+        public static FixedJoint grabAutomaticFullSnapPoint(Rigidbody grabbedBody, float grabbedMass, Rigidbody grabbingBody, Transform snapPosition, Transform snapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
+        {
+            grabbedBody.excludeLayers = excludingGrabLayerMask;
+            grabbedBody.automaticCenterOfMass = false;
+            grabbedBody.centerOfMass = snapPosition.localPosition;
+            grabbedBody.mass = 0f;
+            var fixedJoint = grabbingBody.gameObject.AddComponent<FixedJoint>();
+            fixedJoint.autoConfigureConnectedAnchor = false;
+            grabbedBody.isKinematic = true;
+        
+            Vector3 pos = grabbedBody.transform.InverseTransformPoint(snapPosition.position);
+            grabbedBody.transform.rotation = SnapRotation.getSnapRotation(snapRotation.localRotation, grabbedBody.transform.rotation, grabbingBody.rotation,
+                rotationFilter);
+        
+            fixedJoint.connectedBody = grabbedBody;
+            fixedJoint.connectedAnchor = pos;
+        
+            grabbedBody.isKinematic = false;
+            return fixedJoint;
+        }
+
+        public static FixedJoint storeAutomaticFullSnapPoint(Rigidbody grabbedBody, float grabbedMass, GameObject storage, Transform snapPosition, Transform pocketSnapRotation, Vector3 rotationFilter, LayerMask excludingGrabLayerMask)
+        {
+            grabbedBody.excludeLayers = excludingGrabLayerMask;
+            grabbedBody.automaticCenterOfMass = false;
+            grabbedBody.centerOfMass = snapPosition.localPosition;
+            grabbedBody.mass = 0f;
+            var fixedJoint = storage.AddComponent<FixedJoint>();
+            fixedJoint.autoConfigureConnectedAnchor = false;
+            grabbedBody.transform.rotation = SnapRotation.getSnapRotation(pocketSnapRotation.localRotation, grabbedBody.transform.rotation,
+                storage.transform.rotation, rotationFilter);
+            fixedJoint.connectedAnchor = snapPosition.localPosition;
+            fixedJoint.connectedBody = grabbedBody;
+            return fixedJoint;
+        }
+        
+        
+    }
     
 }

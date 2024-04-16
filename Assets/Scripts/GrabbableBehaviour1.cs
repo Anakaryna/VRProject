@@ -11,6 +11,11 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
 
     public Transform snapPoint;
     public LayerMask excludingGrabLayerMask;
+    
+    public void putMass()
+    {
+        body.mass = 0.2f;
+    }
 
     public FixedJoint Grab(Rigidbody body)
     {
@@ -20,7 +25,7 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
         }
         
         GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(this.body, body, snapPoint, snapPoint, new Vector3(0,0,0), excludingGrabLayerMask);
-        
+        Invoke(nameof(putMass), 0.1f);
         AudioSource.PlayClipAtPoint(audioClip, transform.position, 1);
         return GrabbedFixedJoint;
     }

@@ -22,7 +22,9 @@ public class SliceObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.DrawLine(startSlicePoint.position, endSlicePoint.position, Color.red); // Add this line
+        Debug.Log("Start Point: " + startSlicePoint.position + ", End Point: " + endSlicePoint.position);
+
+        Debug.DrawLine(startSlicePoint.transform.position, endSlicePoint.transform.position, Color.red); // Add this line
         bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
         if (hasHit)
         {

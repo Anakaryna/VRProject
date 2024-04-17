@@ -12,7 +12,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public float jumpHeight = 1.5f;
 
     private float jumpVelocity = 2;
-
+  
     public bool onlyMoveIfGrounded = false;
     public bool jumpWithHand = true;
 

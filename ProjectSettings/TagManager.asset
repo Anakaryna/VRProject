@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Weapon
   - BodyStorage
   layers:
   - Default
@@ -15,11 +16,9 @@ TagManager:
   - Body
   - Grabbable
   - Ground
-<<<<<<< HEAD
+  - Sliceable
   - Grabbableold
-=======
   - Storage
->>>>>>> PLAYER-physics+inventory
   - 
   - 
   - 

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PhysicsSceneDorian.unity
+    path: Assets/Scenes/PhysicsScene.unity
     guid: 8ddb7cb4063db2f41a607d3698174a0e
   - enabled: 1
     path: Assets/Scenes/TransferTestScene.unity

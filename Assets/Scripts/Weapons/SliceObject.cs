@@ -11,7 +11,7 @@ public class SliceObject : MonoBehaviour
 
     public Material crossSectionMaterial;
 
-    public float cutForce = 2000;
+    public float cutForce = 2;
         
     // Start is called before the first frame update
     void Start()
@@ -22,9 +22,6 @@ public class SliceObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("Start Point: " + startSlicePoint.position + ", End Point: " + endSlicePoint.position);
-
-        Debug.DrawLine(startSlicePoint.transform.position, endSlicePoint.transform.position, Color.red); // Add this line
         bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
         if (hasHit)
         {
@@ -32,16 +29,6 @@ public class SliceObject : MonoBehaviour
             Slice(target);
         } 
     }
-
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.layer == sliceableLayer)
-    //     {
-    //         GameObject target = collision.gameObject;
-    //         Slice(target);
-    //     }
-    // }
 
     public void Slice(GameObject target)
     {
@@ -55,8 +42,10 @@ public class SliceObject : MonoBehaviour
         {
             GameObject upperHull = hull.CreateUpperHull(target,crossSectionMaterial);
             SetupSlicedComponent(upperHull);
+            upperHull.layer = target.layer;
             GameObject lowerHull = hull.CreateLowerHull(target,crossSectionMaterial);
             SetupSlicedComponent(lowerHull);
+            lowerHull.layer = target.layer;
             
             Destroy(target);
         }

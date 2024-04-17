@@ -1,146 +1,149 @@
-// using UnityEngine;
-//
-// public class WallRun : MonoBehaviour
-// {
-//     
-//     [Header("detect")]
-//     [SerializeField]private float walljumpforce_hor;
-//     [SerializeField]private float walljumpforce_ver;
-//     [SerializeField]private float Wall_Dist;
-//     [SerializeField]private float Wallrun_check;
-//     [SerializeField]private float min_jump;
-//                     private float Horizontal;
-//                     private float Vertical;
-//    
-//
-//     [Header("WallRunning")] 
-//     [SerializeField]private float Wallrun_Velocity;
-//     [SerializeField]private float gravity_force;
-//     [SerializeField]private float Wallrun_Time;
-//     [SerializeField]private float exit_time;
-//                     private float Wallrun_Timer;
-//                     private float exit_timer;
-//                     [SerializeField]private bool gravity;
-//                     private bool exit_wall;
-//                     private bool Wallright;
-//                     private bool WallLeft;
-//                     private RaycastHit wallleftHit; 
-//                     private RaycastHit wallrightHit;
-//                     public KeyCode jump = KeyCode.Space;
-//
-//
-//     [Header("Ref")] 
-//     [SerializeField]private LayerMask wall;
-//     [SerializeField]private Transform _transform;
-//                     private Rigidbody rb;
-//                     private ContinuousMovementPhysics pm;
-//
-//     void Start()
-//     {
-//         rb = GetComponent<Rigidbody>();
-//         pm = GetComponent<ContinuousMovementPhysics>();
-//         // cam = GetComponent<Camera>();
-//     }
-//
-//     void CheckForWall()
-//     {
-//         Wallright = Physics.Raycast(transform.position, _transform.right, out wallrightHit, Wall_Dist, wall);
-//         WallLeft = Physics.Raycast(transform.position, -_transform.right, out wallleftHit, Wall_Dist, wall);
-//         
-//     }
-//
-//      // bool CheckForGround()
-//      // {
-//      //     return !Physics.Raycast(transform.position, Vector3.down, min_jump, ground);
-//      // }
-//
-//      void wallrun_jump()
-//      {
-//          exit_wall = true;
-//          exit_timer = exit_time;
-//          
-//          Vector3 Wall_Normal = Wallright ? wallrightHit.normal : wallleftHit.normal;
-//          Vector3 jumpForce = transform.up * walljumpforce_hor + Wall_Normal * walljumpforce_ver;
-//          
-//          rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-//          
-//          rb.AddForce(jumpForce,ForceMode.Impulse);
-//
-//      }
-//
-//      void Wallrun_Start()
-//      {
-//          pm.wallrunning = true;
-//          Wallrun_Timer = Wallrun_Time;
-//          rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-//      }
-//      
-//      void Wallrun_Stop()
-//      {
-//          pm.wallrunning = false;
-//
-//
-//      }
-//      void Wallrun()
-//      {
-//          rb.useGravity = gravity;
-//
-//          Vector3 Wall_Normal = Wallright ? wallrightHit.normal : wallleftHit.normal;
-//          Vector3 Wall_Forward = Vector3.Cross(Wall_Normal, transform.up);
-//          
-//          if ((_transform.forward - Wall_Forward).magnitude > (_transform.forward - -Wall_Forward).magnitude)Wall_Forward = -Wall_Forward;
-//
-//          rb.AddForce(Wall_Forward * Wallrun_Velocity,ForceMode.Force);
-//          rb.AddForce(transform.up * gravity_force, ForceMode.Force);
-//      }
-//
-//      void state()
-//      {
-//          Horizontal = Input.GetAxisRaw("Horizontal");
-//          Vertical = Input.GetAxisRaw("Vertical");
-//
-//          if ((Wallright || WallLeft) && Vertical > 0 && !pm._isGrounded && !exit_wall)
-//          {
-//              if (!pm.wallrunning)Wallrun_Start();
-//              
-//              if (Wallrun_Timer > 0)Wallrun_Timer -= Time.deltaTime;
-//
-//              if (Wallrun_Timer <= 0)
-//              {
-//                  exit_wall = true;
-//                  exit_timer = exit_time;
-//              }
-//              
-//              if (Input.GetKeyDown(jump)) wallrun_jump();
-//              
-//          }
-//          else if (exit_wall)
-//          {
-//              if (pm.wallrunning)Wallrun_Stop();
-//              
-//              if (exit_timer > 0) exit_timer -= Time.deltaTime;
-//              
-//              if (exit_timer <= 0) exit_wall = false;
-//
-//          }
-//          else if(pm.wallrunning)
-//          {
-//              Wallrun_Stop();
-//          }
-//      }
-//
-//     // Start is called before the first frame update
-//
-//
-//     // Update is called once per frame
-//     void Update()
-//     {
-//         CheckForWall();
-//         state();
-//     }
-//
-//     private void FixedUpdate()
-//     {
-//         if (pm.wallrunning)Wallrun();
-//     }
-// }
+using UnityEngine;
+using UnityEngine.InputSystem;
+public class WallRun : MonoBehaviour
+{
+    
+    [Header("detect")]
+    [SerializeField]private float walljumpforce_hor;
+    [SerializeField]private float walljumpforce_ver;
+    [SerializeField]private float Wall_Dist;
+    [SerializeField]private float Wallrun_check;
+    [SerializeField]private float min_jump;
+                    private float Horizontal;
+                    private float Vertical;
+   
+
+    [Header("WallRunning")] 
+    [SerializeField]private float Wallrun_Velocity;
+    [SerializeField]private float gravity_force;
+    [SerializeField]private float Wallrun_Time;
+    [SerializeField]private float exit_time;
+                    private float Wallrun_Timer;
+                    private float exit_timer;
+    [SerializeField]private bool gravity;
+                    private bool exit_wall;
+                    private bool Wallright;
+                    private bool WallLeft;
+                    private RaycastHit wallleftHit; 
+                    private RaycastHit wallrightHit;
+                    public InputActionProperty jumpInputSource;
+
+
+    [Header("Ref")] 
+    [SerializeField]private LayerMask wall;
+    [SerializeField]private Transform _transform;
+    [SerializeField]private Rigidbody rb;
+                    private ContinuousMovementPhysics pm;
+
+    void Start()
+    {
+        pm = GetComponent<ContinuousMovementPhysics>();
+        // cam = GetComponent<Camera>();
+    }
+
+    void CheckForWall()
+    {
+        Wallright = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.right, out wallrightHit, Wall_Dist, wall);
+        WallLeft = Physics.Raycast(Camera.main.transform.position, -Camera.main.transform.right, out wallleftHit, Wall_Dist, wall);
+        
+        // Debug.Log("Wall right detected: " + Wallright + ", Wall left detected: " + WallLeft);
+    }
+
+     // bool CheckForGround()
+     // {
+     //     return !Physics.Raycast(transform.position, Vector3.down, min_jump, ground);
+     // }
+
+     void wallrun_jump()
+     {
+         exit_wall = true;
+         exit_timer = exit_time;
+         
+         Vector3 Wall_Normal = Wallright ? wallrightHit.normal : wallleftHit.normal;
+         Vector3 jumpForce = transform.up * walljumpforce_hor + Wall_Normal * walljumpforce_ver;
+         
+         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+         
+         rb.AddForce(jumpForce,ForceMode.Impulse);
+
+     }
+
+     void Wallrun_Start()
+     {
+         pm.wallrunning = true;
+         Wallrun_Timer = Wallrun_Time;
+         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+     }
+     
+     void Wallrun_Stop()
+     {
+         pm.wallrunning = false;
+
+
+     }
+     void Wallrun()
+     {
+         rb.useGravity = gravity;
+
+         Vector3 Wall_Normal = Wallright ? wallrightHit.normal : wallleftHit.normal;
+         Vector3 Wall_Forward = Vector3.Cross(Wall_Normal, transform.up);
+         
+         if ((_transform.forward - Wall_Forward).magnitude > (_transform.forward - -Wall_Forward).magnitude)Wall_Forward = -Wall_Forward;
+
+         rb.AddForce(Wall_Forward * Wallrun_Velocity,ForceMode.Force);
+         rb.AddForce(transform.up * gravity_force, ForceMode.Force);
+     }
+
+     void state()
+     {
+         Horizontal = Input.GetAxisRaw("Horizontal");
+         Vertical = Input.GetAxisRaw("Vertical");
+         
+         Debug.Log("Vertical Input: " + Vertical);
+         if ((Wallright || WallLeft) && Vertical > 0 && !pm.isGrounded && !exit_wall)
+         {
+             Debug.Log("Attempting to start wallrun.");
+             if (!pm.wallrunning)Wallrun_Start();
+             
+             if (Wallrun_Timer > 0)Wallrun_Timer -= Time.deltaTime;
+
+             if (Wallrun_Timer <= 0)
+             {
+                 exit_wall = true;
+                 exit_timer = exit_time;
+             }
+
+             bool inputJump = jumpInputSource.action.WasPressedThisFrame();
+             if (inputJump) wallrun_jump();
+             
+         }
+         else if (exit_wall)
+         {
+             if (pm.wallrunning)Wallrun_Stop();
+             
+             if (exit_timer > 0) exit_timer -= Time.deltaTime;
+             
+             if (exit_timer <= 0) exit_wall = false;
+
+         }
+         else if(pm.wallrunning)
+         {
+             Wallrun_Stop();
+         }
+     }
+
+    // Start is called before the first frame update
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckForWall();
+        state();
+    }
+
+    private void FixedUpdate()
+    {
+        if (pm.wallrunning)Wallrun();
+    }
+}

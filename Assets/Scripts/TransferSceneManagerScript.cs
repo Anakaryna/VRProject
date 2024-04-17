@@ -20,8 +20,6 @@ public class TransferSceneManagerScript : MonoBehaviour
 
     public Transform startupDestination;
 
-    public GameObject XRSimulator;
-
     private bool rigNeedSaving = false;
     
     
@@ -57,11 +55,6 @@ public class TransferSceneManagerScript : MonoBehaviour
         if (rigNeedSaving)
         {
             DontDestroyOnLoad(savedPhysicsRig);
-        }
-        
-        if (XRSimulator != null)
-        {
-            DontDestroyOnLoad(XRSimulator);
         }
         
         print(startupDestination);

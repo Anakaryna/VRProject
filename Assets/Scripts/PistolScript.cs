@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using importedFunctions;
 
-public class PistolScript : MonoBehaviour, IGrabbable, IStorable
+public class PistolScript : MonoBehaviour, IGrabbable, IStorable, IGun
 {
 
 
@@ -11,9 +11,41 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
     public Transform snapPosition;
     public Transform snapRotation;
     public Transform pocketSnapRotation;
+    public Transform firePosition;
     
     public LayerMask storageLayer;
     public LayerMask excludingGrabLayerMask;
+
+    public AudioClip pew;
+    public AudioClip reload;
+    public AudioClip grabS;
+
+    public int ammoPerMag;
+    public int AmmoInCurrMag { get; set; }
+    public GameObject bullet;
+
+    public void Fire()
+    {
+        if (AmmoInCurrMag > 0)
+        {
+            var b = Instantiate(bullet, firePosition.position, firePosition.rotation);
+            if (b.TryGetComponent(out IProjectile projectile))
+            {
+                projectile.Origin = firePosition.position;
+                projectile.Target = firePosition.position + firePosition.forward;
+                projectile.Speed = 75;
+                projectile.MaxDistance = 100;
+                AmmoInCurrMag -= 1;
+                AudioSource.PlayClipAtPoint(pew, firePosition.position);
+            }
+        }
+    }
+
+    public void Reload()
+    {
+        AmmoInCurrMag = ammoPerMag;
+        
+    }
     
     public void putMass()
     {
@@ -33,6 +65,7 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
         GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(mybody, body, snapPosition, snapRotation, new Vector3(1,1,1), excludingGrabLayerMask);
         Invoke(nameof(putMass), 0.1f);
         makeTransfer = true;
+        AudioSource.PlayClipAtPoint(grabS, transform.position);
         return GrabbedFixedJoint;
     }
 
@@ -43,6 +76,11 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
         if (nearbyColliders.Length > 0 && nearbyColliders[0].CompareTag("BodyStorage"))
         {
             stored = Store(transform.InverseTransformPoint(handsPosition), nearbyColliders[0].gameObject);
+            if (stored)
+            {
+                AudioSource.PlayClipAtPoint(reload, transform.position);
+                Reload();
+            }
         }
         else
         {
@@ -66,5 +104,10 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable
     {
         Destroy(Stored);
         return true;
+    }
+
+    void fire()
+    {
+        
     }
 }

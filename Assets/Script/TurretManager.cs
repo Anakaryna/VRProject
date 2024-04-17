@@ -11,6 +11,7 @@ public class TurretManager : MonoBehaviour
     public Transform player;
     public int damping = 2;
     public GameObject bullet;
+    public LayerMask RaycastLayerMask;
     
     
     // Start is called before the first frame update
@@ -48,8 +49,7 @@ public class TurretManager : MonoBehaviour
             
                 RaycastHit hit;
                 colliderToDisable.enabled = false;
-                var rayTest = Physics.Raycast(turretPos, playerPos - turretPos, out hit, 20f);
-            
+                var rayTest = Physics.Raycast(turretPos, playerPos - turretPos, out hit, 20f, RaycastLayerMask);
                 if (rayTest && hit.collider.GameObject() == player.GameObject())
                 {
                     var lookPos = playerPos - turretPos;

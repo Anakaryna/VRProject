@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0dab497b5409541b07b4178e78bb2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turrets: []
+  turretsCanonHeads: []
   player: {fileID: 0}
+  damping: 2
+  bullet: {fileID: 7681409563270337987, guid: c6911c22fcaa5d74e8c01b17eb31d9bb, type: 3}
+  RaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 63

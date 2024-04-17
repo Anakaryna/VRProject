@@ -188,10 +188,10 @@ MonoBehaviour:
   pocketSnapRotation: {fileID: 7998198903941205540}
   storageLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   excludingGrabLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2112
 --- !u!1 &9183851279902453072
 GameObject:
   m_ObjectHideFlags: 0

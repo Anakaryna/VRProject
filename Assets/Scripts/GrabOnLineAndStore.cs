@@ -1,22 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
 using importedFunctions;
 
-public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
+public class GrabOnLineAndStore : MonoBehaviour, IGrabbable, IStorable
 {
     
     public FixedJoint GrabbedFixedJoint { get; set; }
 
     public Rigidbody body;
 
-    public List<Transform> snapPoints;
-    public Transform pocketRotation;
+    public Transform snapPointA;
+    public Transform snapPointB;
+    public Transform rotationPoint;
+    public Transform inverseRotationPoint;
+    public Transform pocketSnapRotation;
+    
+    public LayerMask storageLayer;
 
     public Vector3 rotationMask;
-
-    public LayerMask storageLayer;
     public LayerMask excludingGrabLayerMask;
-
+    
     public void putMass()
     {
         body.mass = 0.2f;
@@ -26,28 +28,26 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
 
     public FixedJoint Store(Vector3 releasePoint, GameObject storage)
     {
-        Stored = GrabAndStorage.storeAutomaticFullSnapPoint(body, storage, snapPoints[0], pocketRotation, new Vector3(1,1,1), excludingGrabLayerMask);
+        Stored = GrabAndStorage.storeAutomaticFullSnapPoint(body, storage, snapPointA, pocketSnapRotation, rotationMask, excludingGrabLayerMask);
         return Stored;
     }
-
+    
     public bool StorageRelease()
     {
         Destroy(Stored);
         return true;
     }
-
+    
     public FixedJoint Grab(Rigidbody body, out bool makeTransfer)
     {
-        
         if (GrabbedFixedJoint)
         {
             makeTransfer = true;
             return null;
         }
 
-        Transform closest = GrabAndStorage.getClosestPosition(snapPoints, body.transform);
-
-        GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(this.body, body, closest, closest, new Vector3(1,1,1), excludingGrabLayerMask);
+        GrabbedFixedJoint = GrabAndStorage.grabAutoFullSnapLine(this.body, body, snapPointA, snapPointB, rotationPoint, inverseRotationPoint, rotationMask,
+            excludingGrabLayerMask);
         Invoke(nameof(putMass), 0.1f);
         makeTransfer = true;
         return GrabbedFixedJoint;
@@ -58,7 +58,6 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
         Collider[] nearbyColliders = Physics.OverlapSphere(handsPosition, 0.2f, storageLayer);
         if (nearbyColliders.Length > 0 && nearbyColliders[0].CompareTag("BodyStorage"))
         {
-            print(nearbyColliders[0]);
             stored = Store(transform.InverseTransformPoint(handsPosition), nearbyColliders[0].gameObject);
         }
         else
@@ -69,5 +68,4 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
             stored = false;
         }
     }
-    
 }

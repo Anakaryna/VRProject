@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TransferSceneManagerScript : MonoBehaviour
 {
@@ -20,8 +21,6 @@ public class TransferSceneManagerScript : MonoBehaviour
 
     public Transform startupDestination;
 
-    public GameObject XRSimulator;
-
     private bool rigNeedSaving = false;
     
     
@@ -34,6 +33,11 @@ public class TransferSceneManagerScript : MonoBehaviour
         else
         {
             InstanceGameObject = gameObject;
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 0 && savedPhysicsRig != null)
+        {
+            Destroy(savedPhysicsRig);
         }
         
         Instance = this;
@@ -58,13 +62,6 @@ public class TransferSceneManagerScript : MonoBehaviour
         {
             DontDestroyOnLoad(savedPhysicsRig);
         }
-        
-        if (XRSimulator != null)
-        {
-            DontDestroyOnLoad(XRSimulator);
-        }
-        
-        print(startupDestination);
         
         if (startupDestination != null)
         {

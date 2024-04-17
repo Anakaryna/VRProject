@@ -13,7 +13,7 @@ public class SliceObject : MonoBehaviour
     public float minCutVelocity = 5; 
 
     void FixedUpdate()
-    { .
+    {
         bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
         if (hasHit)
         {

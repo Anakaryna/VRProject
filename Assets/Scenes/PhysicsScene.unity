@@ -4585,6 +4585,7 @@ MonoBehaviour:
   crossSectionMaterial: {fileID: 2100000, guid: a44b9f1972e8a9b43b5ada8a10d4fb97,
     type: 2}
   cutForce: 2
+  minCutVelocity: 5
 --- !u!1 &2061444209
 GameObject:
   m_ObjectHideFlags: 0

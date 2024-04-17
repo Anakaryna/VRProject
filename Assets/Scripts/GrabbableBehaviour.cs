@@ -8,10 +8,11 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
     public Rigidbody body;
     public LayerMask excludingGrabLayerMask;
 
-    public FixedJoint Grab(Rigidbody body)
+    public FixedJoint Grab(Rigidbody body, out bool makeTransfer)
     {
         if (GrabbedFixedJoint)
         {
+            makeTransfer = true;
             return null;
         }
         this.body.excludeLayers = excludingGrabLayerMask;
@@ -24,14 +25,16 @@ public class GrabbableBehaviour : MonoBehaviour, IGrabbable
         fixedJoint.connectedBody = this.body;
         fixedJoint.connectedAnchor = pos;
         GrabbedFixedJoint = fixedJoint;
+        makeTransfer = true;
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         body.automaticCenterOfMass = true;
         body.excludeLayers = 0;
         body.mass = 1;
+        stored = false;
     }
     
     // Start is called before the first frame update

@@ -9,17 +9,18 @@ public class ClimbableSurface : MonoBehaviour, IGrabbable
 
     public Rigidbody body;
     
-    public FixedJoint Grab(Rigidbody body)
+    public FixedJoint Grab(Rigidbody body, out bool makeTransfer)
     {
         var fixedJoint = body.gameObject.AddComponent<FixedJoint>();
         fixedJoint.autoConfigureConnectedAnchor = false;
         fixedJoint.connectedAnchor = transform.position;
+        makeTransfer = false;
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
-        
+        stored = false;
     }
     
     // Start is called before the first frame update

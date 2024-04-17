@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 public class GrabPhysics : MonoBehaviour
 {
     public Rigidbody body;
@@ -52,7 +54,12 @@ public class GrabPhysics : MonoBehaviour
                 
                 Rigidbody nearbyRigidbody = nearbyColliders[0].attachedRigidbody;
 
-                fixedJoint = grabbable.Grab(body);
+                fixedJoint = grabbable.Grab(body, out bool makeTransfer);
+
+                if (makeTransfer)
+                {
+                    DontDestroyOnLoad(fixedJoint.connectedBody.gameObject);
+                }
 
                 isGrabbing = fixedJoint;
 
@@ -66,7 +73,11 @@ public class GrabPhysics : MonoBehaviour
 
             if(fixedJoint)
             {
-                grabedThing.Release(fixedJoint, transform.position);
+                grabedThing.Release(fixedJoint, transform.position, out bool stored);
+                if (!stored)
+                {
+                    SceneManager.MoveGameObjectToScene(fixedJoint.connectedBody.gameObject, SceneManager.GetActiveScene());
+                }
                 Destroy(fixedJoint);
             }
         }

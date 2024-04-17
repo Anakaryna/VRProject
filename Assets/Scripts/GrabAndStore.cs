@@ -40,11 +40,12 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
         return true;
     }
 
-    public FixedJoint Grab(Rigidbody body)
+    public FixedJoint Grab(Rigidbody body, out bool makeTransfer)
     {
         
         if (GrabbedFixedJoint)
         {
+            makeTransfer = true;
             return null;
         }
 
@@ -52,23 +53,24 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
 
         GrabbedFixedJoint = GrabAndStorage.grabAutomaticFullSnapPoint(this.body, body, closest, closest, new Vector3(1,1,1), excludingGrabLayerMask);
         Invoke(nameof(putMass), 0.1f);
+        makeTransfer = true;
         return GrabbedFixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition)
+    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         Collider[] nearbyColliders = Physics.OverlapSphere(handsPosition, 0.2f, storageLayer);
         if (nearbyColliders.Length > 0 && nearbyColliders[0].CompareTag("BodyStorage"))
         {
             print(nearbyColliders[0]);
-            Store(transform.InverseTransformPoint(handsPosition), nearbyColliders[0].gameObject);
+            stored = Store(transform.InverseTransformPoint(handsPosition), nearbyColliders[0].gameObject);
         }
         else
         {
-            
             body.automaticCenterOfMass = true;
             body.excludeLayers = 0;
             body.mass = 1;
+            stored = false;
         }
     }
     

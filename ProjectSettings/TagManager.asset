@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BodyStorage
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,11 @@ TagManager:
   - Body
   - Grabbable
   - Ground
+<<<<<<< HEAD
   - Grabbableold
+=======
+  - Storage
+>>>>>>> PLAYER-physics+inventory
   - 
   - 
   - 

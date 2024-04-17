@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/SceneDorian.unity.meta
-guid: f34ed88f563af324486ba874ef855b09
-========
-guid: 2244ceea51a1f3a4aa43782fc31403ec
->>>>>>>> origin/MOD-Destruction:Assets/Scenes/DestructionScene.unity.meta
+guid: 77a0ce3939d02e845b181632507a491e
 DefaultImporter:
   externalObjects: {}
   userData: 

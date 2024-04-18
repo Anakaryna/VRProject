@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MeshDestroy : MonoBehaviour
 {
-    private bool edgeSet = false;
-    private Vector3 edgeVertex = Vector3.zero;
-    private Vector2 edgeUV = Vector2.zero;
-    private Plane edgePlane = new Plane();
-    public float requiredVelocity = 5;
+    private bool edgeSet = false;  // Indique si une arête a été définie
+    private Vector3 edgeVertex = Vector3.zero;  // Sommet de l'arête
+    private Vector2 edgeUV = Vector2.zero;  // Coordonnées UV de l'arête
+    private Plane edgePlane = new Plane();  // Plan utilisé pour définir l'arête
+    public float requiredVelocity = 5;  // Vitesse requise pour la destruction
 
-    public int CutCascades = 3;
-    public float ExplodeForce = 5;
+    public int CutCascades = 3;  // Nombre de subdivisions pour la découpe
+    public float ExplodeForce = 5;  // Force de l'explosion après destruction
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +39,17 @@ public class MeshDestroy : MonoBehaviour
     }
 
 
+    // Fonction pour détruire le maillage
     private void DestroyMesh()
     {
+        // Récupère le maillage original de l'objet
         var originalMesh = GetComponent<MeshFilter>().mesh;
         originalMesh.RecalculateBounds();
+        // Initialise une liste pour stocker les différentes parties du maillage
         var parts = new List<PartMesh>();
         var subParts = new List<PartMesh>();
 
+        // Crée une partie principale pour stocker le maillage original
         var mainPart = new PartMesh()
         {
             UV = originalMesh.uv,
@@ -59,6 +63,7 @@ public class MeshDestroy : MonoBehaviour
 
         parts.Add(mainPart);
 
+        // Crée des sous-parties en subdivisant le maillage en plusieurs cascades
         for (var c = 0; c < CutCascades; c++)
         {
             for (var i = 0; i < parts.Count; i++)
@@ -66,11 +71,12 @@ public class MeshDestroy : MonoBehaviour
                 var bounds = parts[i].Bounds;
                 bounds.Expand(0.5f);
 
+                // Crée un plan de découpe aléatoire
                 var plane = new Plane(UnityEngine.Random.onUnitSphere, new Vector3(UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
                                                                                    UnityEngine.Random.Range(bounds.min.y, bounds.max.y),
                                                                                    UnityEngine.Random.Range(bounds.min.z, bounds.max.z)));
 
-
+                // Génère des sous-parties en fonction du plan de découpe
                 subParts.Add(GenerateMesh(parts[i], plane, true));
                 subParts.Add(GenerateMesh(parts[i], plane, false));
             }
@@ -78,14 +84,17 @@ public class MeshDestroy : MonoBehaviour
             subParts.Clear();
         }
 
+        // Crée des objets GameObject à partir des parties du maillage et les détruit
         for (var i = 0; i < parts.Count; i++)
         {
             parts[i].MakeGameobject(this);
             parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject); // Détruit l'objet courant une fois que le maillage a été divisé en parties
     }
+    
+    // Fonction pour générer une partie du maillage en fonction d'un plan de découpe
 
     private PartMesh GenerateMesh(PartMesh original, Plane plane, bool left)
     {
@@ -190,9 +199,10 @@ public class MeshDestroy : MonoBehaviour
 
         partMesh.FillArrays();
 
-        return partMesh;
+        return partMesh; // Retourne la partie du maillage générée
     }
 
+    // Fonction pour ajouter une arête entre deux sommets
     private void AddEdge(int subMesh, PartMesh partMesh, Vector3 normal, Vector3 vertex1, Vector3 vertex2, Vector2 uv1, Vector2 uv2)
     {
         if (!edgeSet)
@@ -218,6 +228,7 @@ public class MeshDestroy : MonoBehaviour
         }
     }
 
+    // Classe représentant une partie du maillage
     public class PartMesh
     {
         private List<Vector3> _Verticies = new List<Vector3>();
@@ -236,6 +247,7 @@ public class MeshDestroy : MonoBehaviour
 
         }
 
+        // Fonction pour ajouter un triangle à la partie du maillage
         public void AddTriangle(int submesh, Vector3 vert1, Vector3 vert2, Vector3 vert3, Vector3 normal1, Vector3 normal2, Vector3 normal3, Vector2 uv1, Vector2 uv2, Vector2 uv3)
         {
             if (_Triangles.Count - 1 < submesh)
@@ -262,6 +274,7 @@ public class MeshDestroy : MonoBehaviour
             Bounds.max = Vector3.Min(Bounds.max, vert3);
         }
 
+        // Fonction pour remplir les tableaux des sommets, des normales, des UVs et des triangles
         public void FillArrays()
         {
             Vertices = _Verticies.ToArray();
@@ -272,6 +285,7 @@ public class MeshDestroy : MonoBehaviour
                 Triangles[i] = _Triangles[i].ToArray();
         }
 
+        // Fonction pour créer un GameObject à partir de la partie du maillage
         public void MakeGameobject(MeshDestroy original)
         {
             GameObject = new GameObject(original.name);

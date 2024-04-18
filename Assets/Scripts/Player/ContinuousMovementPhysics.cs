@@ -133,7 +133,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public bool CheckIfGrounded()
     {
         Vector3 start = bodyCollider.transform.TransformPoint(bodyCollider.center);
-        float rayLength = bodyCollider.height / 2 + 0.05f;
+        float rayLength = bodyCollider.height / 2 - bodyCollider.radius + 0.05f;
 
         bool hasHit = Physics.SphereCast(start, bodyCollider.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer);
 

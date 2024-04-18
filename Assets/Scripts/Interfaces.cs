@@ -1,5 +1,19 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+
+public interface ICooldown 
+{
+    public float Cooldown { get; set; }
+
+    void updateCooldown(float value);
+    void resetCooldown();
+}
+
+public interface IPlayable
+{
+    void SwitchScene(SceneAsset scene);
+}
 
 public interface IDamagable
 {

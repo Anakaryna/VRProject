@@ -18,25 +18,20 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
     public float minJumpWithHandSpeed = 2;
     public float maxJumpWithHandSpeed = 7;
-    
     [Header("INPUT ACTION")]
     public InputActionProperty moveInputSource;
     public InputActionProperty turnInputSource;
     public InputActionProperty jumpInputSource;
-    
     [Header("RIGID BODY")]
     public Rigidbody rb;
     public Rigidbody leftHandRB;
     public Rigidbody rightHandRB;
     public float heightWhenJumping = 2;
-    
     [Header("LAYER")]
     public LayerMask groundLayer;
-    
     [Header("CAMERA")]
     public Transform directionSource;
     public Transform turnSource;
-    
     [Header("COLLIDER")]
     public CapsuleCollider bodyCollider;
     
@@ -52,7 +47,8 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private PhysicRig ph;
     private Vector2 inputMoveAxis;
     private float inputTurnAxis;
-    private bool isGrounded;
+    public bool isGrounded;
+    public bool wallrunning;
     
     private void Start()
     {
@@ -72,7 +68,6 @@ public class ContinuousMovementPhysics : MonoBehaviour
         {
             RunWithHandsCheck();
         }
-
         if (!jumpWithHand)
         {
             if (inputJump && isGrounded)
@@ -85,11 +80,18 @@ public class ContinuousMovementPhysics : MonoBehaviour
         {
             bool inputJumpPressed = jumpInputSource.action.IsPressed();
 
-            float handSpeed = ((leftHandRB.velocity - rb.velocity).magnitude + (rightHandRB.velocity - rb.velocity).magnitude) / 2;
+            // Compute the average upward hand velocity, ignoring downward motion
+            float leftHandUpwardVelocity = Mathf.Max(0, leftHandRB.velocity.y - rb.velocity.y);
+            float rightHandUpwardVelocity = Mathf.Max(0, rightHandRB.velocity.y - rb.velocity.y);
+            float averageUpwardHandVelocity = (leftHandUpwardVelocity + rightHandUpwardVelocity) / 2;
 
-            if (inputJumpPressed && isGrounded && handSpeed > minJumpWithHandSpeed)
+            // Check if both hands are contributing to the upward motion
+            bool bothHandsMovingUp = leftHandUpwardVelocity > 0 && rightHandUpwardVelocity > 0;
+
+            if (inputJumpPressed && isGrounded && bothHandsMovingUp && averageUpwardHandVelocity > minJumpWithHandSpeed)
             {
-                rb.velocity = Vector3.up * Mathf.Clamp(handSpeed, minJumpWithHandSpeed, maxJumpWithHandSpeed);
+                float jumpVelocity = Mathf.Clamp(averageUpwardHandVelocity, minJumpWithHandSpeed, maxJumpWithHandSpeed);
+                rb.velocity = Vector3.up * jumpVelocity;
             }
         }
     }
@@ -98,7 +100,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     {
         isGrounded = CheckIfGrounded();
 
-        if (!onlyMoveIfGrounded || (onlyMoveIfGrounded && isGrounded))
+        if (!onlyMoveIfGrounded && !wallrunning || (onlyMoveIfGrounded && isGrounded))
         {
             Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
             Vector3 direction = yaw * new Vector3(inputMoveAxis.x, 0, inputMoveAxis.y);
@@ -119,7 +121,6 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
         if (!isGrounded)
         {
-            
             ph.bodyHeightMax = 0.5f;
         }
         else

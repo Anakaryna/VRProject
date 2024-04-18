@@ -823,14 +823,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc3cfd8f094c14d9db5003d3682509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2183154963651969681}
+  body: {fileID: 0}
   grabInputSource:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
-      m_Name: Grab Input Source
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: b27a24b6-d411-4062-a67a-6f9e14581197
+      m_Id: e12b18b5-69f9-48b2-b5c6-ec785dc65d16
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -853,7 +853,7 @@ MonoBehaviour:
   radius: 0.1
   grabLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!1 &4375318386999902527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,14 +1248,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc3cfd8f094c14d9db5003d3682509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 4615916042672667229}
+  body: {fileID: 0}
   grabInputSource:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
-      m_Name: Grab Input Source
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: fb4ad546-9be3-4679-9fb6-c1ade41a9169
+      m_Id: 1095dc70-98dd-4a37-8d1a-465e5dee6e65
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1543,6 +1543,7 @@ GameObject:
   - component: {fileID: 8295628380178016532}
   - component: {fileID: 2477610392863472274}
   - component: {fileID: 8219663975092071370}
+  - component: {fileID: 6457478421255614614}
   m_Layer: 6
   m_Name: Physics Rig
   m_TagString: Untagged
@@ -1673,6 +1674,48 @@ MonoBehaviour:
   minRunWithHandsSpeed: 1
   maxRunWithHandsSpeed: 5
   runMultiplier: 2
+  isGrounded: 0
+  wallrunning: 0
+--- !u!114 &6457478421255614614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748434337976925380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f3d7c20545af047b2fe08db59303f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walljumpforce_hor: 7
+  walljumpforce_ver: 12
+  Wall_Dist: 1
+  Wallrun_check: 0
+  min_jump: 0
+  Wallrun_Velocity: 200
+  gravity_force: 10
+  Wallrun_Time: 2
+  exit_time: 0.7
+  gravity: 0
+  jumpInputSource:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Jump Input Source
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7c7c5fee-2446-4926-a36d-0d2d21d62b7a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6691115344597747562, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  wall:
+    serializedVersion: 2
+    m_Bits: 8192
+  _transform: {fileID: 8802564554524388380}
+  rb: {fileID: 8982894199980207721}
 --- !u!1 &7200294200323287323
 GameObject:
   m_ObjectHideFlags: 0

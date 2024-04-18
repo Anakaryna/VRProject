@@ -221,10 +221,10 @@ MonoBehaviour:
   firePosition: {fileID: 6169418178984188644}
   storageLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
   excludingGrabLayerMask:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 2112
   pew: {fileID: 8300000, guid: 9e8821cf9159db6439fe7eaa4fada0a2, type: 3}
   reload: {fileID: 8300000, guid: 937763c58476ad148b248cfa3084c641, type: 3}
   grabS: {fileID: 8300000, guid: ff86240731b83bd489c4fe8e0eac12e7, type: 3}

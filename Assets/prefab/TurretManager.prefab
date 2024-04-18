@@ -41,13 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6714602562129804441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0dab497b5409541b07b4178e78bb2b, type: 3}
+  m_Script: {fileID: 11500000, guid: e7d32288f07421041a4996e9c2a5accb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turretsCanonHeads: []
   player: {fileID: 0}
   damping: 2
-  bullet: {fileID: 7681409563270337987, guid: c6911c22fcaa5d74e8c01b17eb31d9bb, type: 3}
+  bullet: {fileID: 0}
   RaycastLayerMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 64

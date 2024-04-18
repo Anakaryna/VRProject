@@ -45,12 +45,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 588316397373146503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4e718f8deacc949912bdb574713bc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9196bfcf5d222fd45ab6cf5e1a2cd169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 588316397373146503}
+  turret: {fileID: 0}
   startingHealth: 350
-  startingCooldown: 3
+  startingCooldown: 30
 --- !u!136 &3043124763243457042
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -158,10 +158,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4616123456011773795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bc01970825d0540958496ed519d282, type: 3}
+  m_Script: {fileID: 11500000, guid: aba5737c8a85f0b43b14827b9a730d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  o: {fileID: 588316397373146503}
+  o: {fileID: 0}
 --- !u!1 &4632493118415436467
 GameObject:
   m_ObjectHideFlags: 0

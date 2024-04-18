@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1486329389674978527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6169418178984188644}
+  m_Layer: 0
+  m_Name: firePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6169418178984188644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486329389674978527}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.478, z: 0.945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3251165206290967975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2390648774354941895
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +130,7 @@ Transform:
   - {fileID: 3683005488741028291}
   - {fileID: 7998198903941205540}
   - {fileID: 2586589642423535591}
+  - {fileID: 6169418178984188644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7394504676313867056
@@ -186,12 +218,18 @@ MonoBehaviour:
   snapPosition: {fileID: 9193562043427844559}
   snapRotation: {fileID: 3683005488741028291}
   pocketSnapRotation: {fileID: 7998198903941205540}
+  firePosition: {fileID: 6169418178984188644}
   storageLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 512
   excludingGrabLayerMask:
     serializedVersion: 2
-    m_Bits: 2112
+    m_Bits: 576
+  pew: {fileID: 8300000, guid: 9e8821cf9159db6439fe7eaa4fada0a2, type: 3}
+  reload: {fileID: 8300000, guid: 937763c58476ad148b248cfa3084c641, type: 3}
+  grabS: {fileID: 8300000, guid: ff86240731b83bd489c4fe8e0eac12e7, type: 3}
+  ammoPerMag: 24
+  bullet: {fileID: 2422158821127247415, guid: e3004ea4cfe18544c97764496bccc79c, type: 3}
 --- !u!1 &9183851279902453072
 GameObject:
   m_ObjectHideFlags: 0

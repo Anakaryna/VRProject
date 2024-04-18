@@ -10,6 +10,8 @@ public class GrabPhysics : MonoBehaviour
     public Rigidbody body;
     [Header("INPUT ACTION")]
     public InputActionProperty grabInputSource;
+    [Header("INPUT ACTION")]
+    public InputActionProperty triggerInputSource;
     [Header("RADIUS")]
     public float radius = 0.1f;
     [Header("LAYER")]
@@ -19,10 +21,13 @@ public class GrabPhysics : MonoBehaviour
     private bool isGrabbing = false;
     private IGrabbable grabedThing; // hey maybe you could do a recall mod thanks to that ?
 
+    private bool isTriggering = false;
+
     // Update is called once per frame
     void FixedUpdate()
     {
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
+        bool isTriggerPressed = triggerInputSource.action.ReadValue<float>() > 0.1f;
 
         if(isGrabButtonPressed && !isGrabbing)
         {
@@ -80,6 +85,19 @@ public class GrabPhysics : MonoBehaviour
                 }
                 Destroy(fixedJoint);
             }
+        }
+
+        if (isTriggerPressed && !isTriggering)
+        {
+            isTriggering = true;
+            if (fixedJoint.connectedBody.gameObject.TryGetComponent(out IGun gun))
+            {
+                gun.Fire();
+            }
+        }
+        else if(!isTriggerPressed && isTriggering)
+        {
+            isTriggering = false;
         }
     }
 }

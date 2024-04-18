@@ -33,3 +33,19 @@ public interface IStorable
 
     public bool StorageRelease();
 }
+
+public interface IProjectile
+{
+    public Vector3 Target { get; set; }
+    public Vector3 Origin { get; set; }
+    
+    public float Speed { get; set; }
+    public float MaxDistance { get; set; }
+}
+
+public interface IGun
+{
+    public int AmmoInCurrMag { get; set; }
+    public void Fire();
+    public void Reload();
+}

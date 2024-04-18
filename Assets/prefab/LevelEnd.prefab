@@ -414,7 +414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19ba1d4ae97e11b489a4c9f23925a76d, type: 2}
+  - {fileID: 2100000, guid: 774c26c13dc451d44869e2e8704c97a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,9 +449,9 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 278455
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5719ca128bcccd4488f7dc8f129c812e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: {fileID: 0}
+  sceneIndex: 0
 --- !u!1 &8350662532262921630
 GameObject:
   m_ObjectHideFlags: 0

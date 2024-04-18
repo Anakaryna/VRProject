@@ -17,6 +17,11 @@ public class TurretManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var ressources = FindObjectsByType<imHeadPhysics>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
+        if (ressources.Length > 0)
+        {
+            player = ressources[0].gameObject.transform;
+        }
         foreach (var turret in turretsCanonHeads)
         {
             turret.gameObject.GetComponentInParent<ICooldown>().resetCooldown();
@@ -99,8 +104,6 @@ public class TurretManager : MonoBehaviour
             var bullet1 = Instantiate(bullet);
             bullet1.transform.position = turretPos;
             var projectile = bullet1.GetComponent<IProjectile>();
-            projectile.TrailTime = 0.03f;
-            projectile.TrailWidth = 0.05f;
             projectile.Origin = turretPos;
             projectile.MaxDistance = 20;
             projectile.Target = hit2.point;

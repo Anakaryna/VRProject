@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,55 +22,48 @@ public class TransferSceneManagerScript : MonoBehaviour
 
     public Transform startupDestination;
 
+    public float playerScale = 1;
+
     private bool rigNeedSaving = false;
     
     
     private void Awake()
     {
-        if (Instance != null)
+        
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+        Destroy(InstanceGameObject);
+        InstanceGameObject = gameObject;
+        
+        var res = FindObjectsByType<imPlayer>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+
+        if (res.Length == 0)
         {
-            Destroy(InstanceGameObject);
+            //rigNeedSaving = true;
+            var o = Instantiate(physicsRig, null, startupDestination);
+            savedPhysicsRig = o.gameObject;
+            savedPlayerCapsule = o.transform.GetChild(0).transform.GetChild(1).GetComponent<Collider>();
+            DontDestroyOnLoad(o);
         }
         else
         {
-            InstanceGameObject = gameObject;
-        }
-
-        if (SceneManager.GetActiveScene().buildIndex == 0 && savedPhysicsRig != null)
-        {
-            Destroy(savedPhysicsRig);
-        }
+            savedPhysicsRig.transform.localScale = new Vector3(playerScale, playerScale, playerScale);
         
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        if (savedPhysicsRig == null && physicsRig != null)
-        {
-            rigNeedSaving = true;
-            savedPhysicsRig = physicsRig;
-        }
-        
-        if (savedPlayerCapsule == null && playerCapsule != null)
-        {
-            savedPlayerCapsule = playerCapsule;
+            if (startupDestination != null)
+            {
+                Vector3 feet = new Vector3(savedPlayerCapsule.bounds.center.x, savedPlayerCapsule.bounds.center.y - (savedPlayerCapsule.bounds.size.y/2),
+                    savedPlayerCapsule.bounds.center.z);
+                Vector3 dest = startupDestination.position - feet;
+                savedPhysicsRig.transform.position += dest;
+            }
+            
+            res[0].gameObject.SetActive(true);
         }
         
     }
 
-    private void Start()
+    void Start()
     {
-        if (rigNeedSaving)
-        {
-            DontDestroyOnLoad(savedPhysicsRig);
-        }
-        
-        if (startupDestination != null)
-        {
-            Vector3 feet = new Vector3(savedPlayerCapsule.bounds.center.x, savedPlayerCapsule.bounds.center.y - (savedPlayerCapsule.bounds.size.y/2),
-                savedPlayerCapsule.bounds.center.z);
-            Vector3 dest = startupDestination.position - feet;
-            savedPhysicsRig.transform.position += dest;
-        }
         
     }
 }

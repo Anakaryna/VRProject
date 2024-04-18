@@ -47,7 +47,7 @@ MonoBehaviour:
   turretsCanonHeads: []
   player: {fileID: 0}
   damping: 2
-  bullet: {fileID: 0}
+  bullet: {fileID: 2422158821127247415, guid: e3004ea4cfe18544c97764496bccc79c, type: 3}
   RaycastLayerMask:
     serializedVersion: 2
     m_Bits: 64

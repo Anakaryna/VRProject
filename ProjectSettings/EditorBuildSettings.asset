@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Arcadia.unity
     guid: bc916bfddd017914787b2c5a9acf7745
   - enabled: 1
-    path: Assets/Scenes/New Scene.unity
-    guid: 375e778bbbc914f4a8083b670a7555f3
+    path: Assets/Scenes/Level0.unity
+    guid: 5a5a8269e2d8f5742bf3ad6fc08a8b4d
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: bac839738b7257d4c970eae26f78ff13
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 4aa286ee58feb2e488403edbe4e06f7d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e2e19bf13393bf84282c1edb9a48472d,
       type: 2}

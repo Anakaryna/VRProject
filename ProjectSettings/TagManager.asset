@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - BodyStorage
+  - Destructible
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,6 @@ TagManager:
   - Sliceable
   - Grabbableold
   - Storage
-  - 
-  - 
   - 
   - 
   - 

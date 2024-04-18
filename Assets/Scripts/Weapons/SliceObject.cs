@@ -8,6 +8,7 @@ public class SliceObject : MonoBehaviour
     public VelocityEstimator velocityEstimator;
     public LayerMask sliceableLayer;
     public Material crossSectionMaterial;
+    public AudioSource audioSource; // Référence à l'AudioSource
 
     public float cutForce = 2;
     public float minCutVelocity = 5; 
@@ -29,7 +30,7 @@ public class SliceObject : MonoBehaviour
         {
             Vector3 planeNormal = Vector3.Cross(endSlicePoint.position - startSlicePoint.position, velocity);
             planeNormal.Normalize();
-    
+
             SlicedHull hull = target.Slice(endSlicePoint.position, planeNormal);
             if (hull != null)
             {
@@ -40,12 +41,12 @@ public class SliceObject : MonoBehaviour
                 GameObject lowerHull = hull.CreateLowerHull(target, crossSectionMaterial);
                 SetupSlicedComponent(lowerHull, target);  
                 lowerHull.layer = target.layer;
-        
+
+                audioSource.Play(); // Jouer le son
                 Destroy(target);
             }
         }
     }
-
 
     public void SetupSlicedComponent(GameObject slicedObject, GameObject original)
     {
@@ -53,12 +54,11 @@ public class SliceObject : MonoBehaviour
         MeshCollider collider = slicedObject.AddComponent<MeshCollider>();
         collider.convex = true;
         rb.AddExplosionForce(cutForce, slicedObject.transform.position, 1);
-        
+
         MeshDestroy originalScript = original.GetComponent<MeshDestroy>();
         if (originalScript != null)
         {
             MeshDestroy newScript = slicedObject.AddComponent<MeshDestroy>();
         }
     }
-
 }

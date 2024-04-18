@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MeshDestroy : MonoBehaviour
 {
+    public AudioSource audioSource;  
+    public AudioClip impactSound; 
+    
     private bool edgeSet = false;
     private Vector3 edgeVertex = Vector3.zero;
     private Vector2 edgeUV = Vector2.zero;
@@ -34,7 +37,16 @@ public class MeshDestroy : MonoBehaviour
         // Check if the colliding object is tagged as 'Weapon' and moving fast enough
         if (collision.gameObject.tag == "Weapon" && collision.relativeVelocity.magnitude > requiredVelocity)
         {
+            PlayImpactSound();
             DestroyMesh();
+        }
+    }
+
+    private void PlayImpactSound()
+    {
+        if (audioSource && impactSound)
+        {
+            audioSource.PlayOneShot(impactSound);
         }
     }
 

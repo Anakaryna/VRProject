@@ -62,7 +62,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
         ph = GetComponent<PhysicRig>();
 
-        bool inputJump = jumpInputSource.action.WasPressedThisFrame();
+        bool inputJump = jumpInputSource.action.WasPerformedThisFrame();
         
         if (runWithHands)
         {
@@ -73,7 +73,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
             if (inputJump && isGrounded)
             {
                 jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-                rb.velocity += Vector3.up * jumpVelocity;
+                rb.AddForce(rb.transform.up * jumpHeight, ForceMode.Acceleration);
             }
         }
         else
@@ -91,7 +91,8 @@ public class ContinuousMovementPhysics : MonoBehaviour
             if (inputJumpPressed && isGrounded && bothHandsMovingUp && averageUpwardHandVelocity > minJumpWithHandSpeed)
             {
                 float jumpVelocity = Mathf.Clamp(averageUpwardHandVelocity, minJumpWithHandSpeed, maxJumpWithHandSpeed);
-                rb.velocity = Vector3.up * jumpVelocity;
+                rb.AddForce(rb.transform.up * jumpHeight, ForceMode.Acceleration);
+                //rb.velocity = Vector3.up * (jumpVelocity * jumpHeight);
             }
         }
     }
@@ -132,7 +133,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public bool CheckIfGrounded()
     {
         Vector3 start = bodyCollider.transform.TransformPoint(bodyCollider.center);
-        float rayLength = bodyCollider.height / 2 - bodyCollider.radius + 0.05f;
+        float rayLength = bodyCollider.height / 2 + 0.05f;
 
         bool hasHit = Physics.SphereCast(start, bodyCollider.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer);
 

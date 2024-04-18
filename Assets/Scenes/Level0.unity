@@ -10823,10 +10823,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6457478421255614614, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: Wallrun_Velocity
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 6748434337976925380, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
       propertyPath: m_Name
       value: Physics Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: jumpWithHand
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 292663
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: maxJumpWithHandSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8295628380178016532, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
@@ -84820,22 +84850,22 @@ PrefabInstance:
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5698133
+      value: 3.265
       objectReference: {fileID: 0}
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
@@ -84845,7 +84875,7 @@ PrefabInstance:
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.161511
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 3251165206290967975, guid: 7788e8572170b3e48898d38f6d7d556b,
         type: 3}

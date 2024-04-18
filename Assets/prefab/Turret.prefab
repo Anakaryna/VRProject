@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 730756355104238376}
   - component: {fileID: 3043124763243457042}
   - component: {fileID: 8674791435412244967}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2122029704188454872}
   - component: {fileID: 6797534167015051481}
   - component: {fileID: 7120315114139813606}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: CriticalPointHitbox
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4270448236066692248}
   - component: {fileID: 8172835816833126435}
   - component: {fileID: 1438974175498132376}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: CanonArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7339700970147857286}
   - component: {fileID: 6661404291224573991}
   - component: {fileID: 8650836023070970355}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 5012704534071238453}
   - component: {fileID: 9200529597893704345}
   - component: {fileID: 8870614482565635966}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: CanonHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}

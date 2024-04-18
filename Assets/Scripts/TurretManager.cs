@@ -17,7 +17,7 @@ public class TurretManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var ressources = FindObjectsByType<imHeadPhysics>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
+        var ressources = FindObjectsByType<imHeadPhysics>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
         if (ressources.Length > 0)
         {
             player = ressources[0].gameObject.transform;
@@ -54,7 +54,7 @@ public class TurretManager : MonoBehaviour
             
                 RaycastHit hit;
                 colliderToDisable.enabled = false;
-                var rayTest = Physics.Raycast(turretPos, playerPos - turretPos, out hit, 20f, RaycastLayerMask);
+                var rayTest = Physics.Raycast(turretPos, playerPos - turretPos, out hit, 2000f, RaycastLayerMask);
                 if (rayTest && hit.collider.GameObject() == player.GameObject())
                 {
                     var lookPos = playerPos - turretPos;

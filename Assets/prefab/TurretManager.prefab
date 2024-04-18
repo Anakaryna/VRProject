@@ -50,4 +50,4 @@ MonoBehaviour:
   bullet: {fileID: 2422158821127247415, guid: e3004ea4cfe18544c97764496bccc79c, type: 3}
   RaycastLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 16384

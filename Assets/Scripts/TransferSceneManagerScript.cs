@@ -39,14 +39,14 @@ public class TransferSceneManagerScript : MonoBehaviour
 
         if (res.Length == 0)
         {
-            Destroy(res[0].gameObject);
-            /*var o = Instantiate(physicsRig, null, startupDestination);
+            var o = Instantiate(physicsRig, null, startupDestination);
             savedPhysicsRig = o.gameObject;
             savedPlayerCapsule = o.transform.GetChild(0).transform.GetChild(1).GetComponent<Collider>();
-            DontDestroyOnLoad(o);*/
+            DontDestroyOnLoad(o);
         }
         else
         {
+            Destroy(res[0].gameObject);
             savedPhysicsRig.transform.localScale = new Vector3(playerScale, playerScale, playerScale);
         
             if (startupDestination != null)

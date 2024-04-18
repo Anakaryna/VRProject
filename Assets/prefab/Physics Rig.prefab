@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc3cfd8f094c14d9db5003d3682509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
+  body: {fileID: 2183154963651969681}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -853,7 +853,7 @@ MonoBehaviour:
   radius: 0.1
   grabLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!1 &4375318386999902527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc3cfd8f094c14d9db5003d3682509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
+  body: {fileID: 4615916042672667229}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -1727,7 +1727,7 @@ MonoBehaviour:
       type: 3}
   wall:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 262144
   _transform: {fileID: 8802564554524388380}
   rb: {fileID: 8982894199980207721}
 --- !u!114 &4843048989621298063

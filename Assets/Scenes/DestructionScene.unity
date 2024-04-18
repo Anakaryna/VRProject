@@ -2404,6 +2404,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553497829}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &624415673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1449437233320719476, guid: a364506090fbe5546ba7d32a6ae1c39b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4802471835204275779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &789713135
 GameObject:
   m_ObjectHideFlags: 0
@@ -7387,11 +7393,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 766273203955935975, guid: a364506090fbe5546ba7d32a6ae1c39b,
+        type: 3}
+      propertyPath: pocketSnapRotation
+      value: 
+      objectReference: {fileID: 624415673}
+    - target: {fileID: 5305466261290707766, guid: a364506090fbe5546ba7d32a6ae1c39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -85
+      objectReference: {fileID: 0}
     - target: {fileID: 5655317462682045320, guid: a364506090fbe5546ba7d32a6ae1c39b,
         type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 923971682}
+    - target: {fileID: 5825526858025179928, guid: a364506090fbe5546ba7d32a6ae1c39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 95
+      objectReference: {fileID: 0}
     - target: {fileID: 6038845791442325292, guid: a364506090fbe5546ba7d32a6ae1c39b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7458,7 +7479,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8612763714337297232, guid: a364506090fbe5546ba7d32a6ae1c39b,
         type: 3}
-      insertIndex: -1
+      insertIndex: 5
       addedObject: {fileID: 923971682}
   m_SourcePrefab: {fileID: 100100000, guid: a364506090fbe5546ba7d32a6ae1c39b, type: 3}
 --- !u!1660057539 &9223372036854775807

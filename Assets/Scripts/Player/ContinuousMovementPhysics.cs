@@ -60,7 +60,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     {
         inputMoveAxis = moveInputSource.action.ReadValue<Vector2>();
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
-        ph = GetComponent<PhysicRig>();
+        ph = gameObject.GetComponent<PhysicRig>();
 
         bool inputJump = jumpInputSource.action.WasPerformedThisFrame();
         

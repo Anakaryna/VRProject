@@ -10,11 +10,6 @@ public interface ICooldown
     void resetCooldown();
 }
 
-public interface IPlayable
-{
-    void SwitchScene(SceneAsset scene);
-}
-
 public interface IDamagable
 {
     public int Health { get; set; }

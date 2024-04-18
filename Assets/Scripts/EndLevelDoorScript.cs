@@ -15,7 +15,6 @@ public class EndLevelDoorScript : MonoBehaviour
         var  res = FindObjectsByType<imPlayer>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
         if (res.Length > 0)
         {
-            res[0].gameObject.SetActive(false);
         }
         SceneManager.LoadScene(sceneIndex);
     }

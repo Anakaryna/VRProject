@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac153b6d7e77b743904a1aaf3bb0e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicsRig: {fileID: 0}
+  physicsRig: {fileID: 6748434337976925380, guid: 5395e29505740a244a9965ed7030612a,
+    type: 3}
   playerCapsule: {fileID: 0}
   startupDestination: {fileID: 0}
+  playerScale: 1

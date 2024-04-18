@@ -30,20 +30,20 @@ public class TransferSceneManagerScript : MonoBehaviour
     private void Awake()
     {
         
-        DontDestroyOnLoad(gameObject);
+        /*DontDestroyOnLoad(gameObject);
         Instance = this;
         Destroy(InstanceGameObject);
-        InstanceGameObject = gameObject;
+        InstanceGameObject = gameObject;*/
         
         var res = FindObjectsByType<imPlayer>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
 
         if (res.Length == 0)
         {
-            //rigNeedSaving = true;
-            var o = Instantiate(physicsRig, null, startupDestination);
+            Destroy(res[0].gameObject);
+            /*var o = Instantiate(physicsRig, null, startupDestination);
             savedPhysicsRig = o.gameObject;
             savedPlayerCapsule = o.transform.GetChild(0).transform.GetChild(1).GetComponent<Collider>();
-            DontDestroyOnLoad(o);
+            DontDestroyOnLoad(o);*/
         }
         else
         {
@@ -56,8 +56,6 @@ public class TransferSceneManagerScript : MonoBehaviour
                 Vector3 dest = startupDestination.position - feet;
                 savedPhysicsRig.transform.position += dest;
             }
-            
-            res[0].gameObject.SetActive(true);
         }
         
     }

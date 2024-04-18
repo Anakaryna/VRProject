@@ -28,7 +28,6 @@ public class GrabPhysics : MonoBehaviour
     {
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isTriggerPressed = triggerInputSource.action.ReadValue<float>() > 0.1f;
-
         if(isGrabButtonPressed && !isGrabbing)
         {
             Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, radius, grabLayer);

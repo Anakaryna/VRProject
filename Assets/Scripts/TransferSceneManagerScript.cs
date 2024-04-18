@@ -46,7 +46,6 @@ public class TransferSceneManagerScript : MonoBehaviour
         }
         else
         {
-            Destroy(res[0].gameObject);
             savedPhysicsRig.transform.localScale = new Vector3(playerScale, playerScale, playerScale);
         
             if (startupDestination != null)

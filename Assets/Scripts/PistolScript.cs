@@ -105,9 +105,4 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable, IGun
         Destroy(Stored);
         return true;
     }
-
-    void fire()
-    {
-        
-    }
 }

@@ -687,6 +687,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5273958732797359009, guid: f7fb1511764cdda4786b37e012d7c2de,
+        type: 3}
+      propertyPath: storageLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273958732797359009, guid: f7fb1511764cdda4786b37e012d7c2de,
+        type: 3}
+      propertyPath: excludingGrabLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5933770696864215082, guid: f7fb1511764cdda4786b37e012d7c2de,
         type: 3}
       propertyPath: m_Name
@@ -1300,6 +1310,32 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1905254090158834837, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1861382750}
+    - target: {fileID: 1905254090158834837, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905254090158834837, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_Reference
+      value: 
+      objectReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 1905254090158834837, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905254090158834837, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_Action.m_Name
+      value: Grab Input Source
+      objectReference: {fileID: 0}
     - target: {fileID: 6549490742169093519, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
       propertyPath: m_RenderPostProcessing
@@ -1309,6 +1345,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Physics Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931928341895017296, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1861382751}
+    - target: {fileID: 6931928341895017296, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931928341895017296, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_Reference
+      value: 
+      objectReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 6931928341895017296, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931928341895017296, guid: 5395e29505740a244a9965ed7030612a,
+        type: 3}
+      propertyPath: grabInputSource.m_Action.m_Name
+      value: Grab Input Source
       objectReference: {fileID: 0}
     - target: {fileID: 8295628380178016532, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
@@ -1365,6 +1427,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5395e29505740a244a9965ed7030612a, type: 3}
+--- !u!54 &1861382750 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2183154963651969681, guid: 5395e29505740a244a9965ed7030612a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1861382749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1861382751 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4615916042672667229, guid: 5395e29505740a244a9965ed7030612a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1861382749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913767943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,6 +1862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationMask.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024684909839988227, guid: a364506090fbe5546ba7d32a6ae1c39b,
+        type: 3}
+      propertyPath: excludingGrabLayerMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8612763714337297232, guid: a364506090fbe5546ba7d32a6ae1c39b,
         type: 3}

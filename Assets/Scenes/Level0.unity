@@ -10841,7 +10841,7 @@ PrefabInstance:
     - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
       propertyPath: jumpHeight
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
@@ -10856,7 +10856,7 @@ PrefabInstance:
     - target: {fileID: 8219663975092071370, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}
       propertyPath: maxJumpWithHandSpeed
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8295628380178016532, guid: 5395e29505740a244a9965ed7030612a,
         type: 3}

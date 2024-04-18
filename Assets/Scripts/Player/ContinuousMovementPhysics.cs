@@ -92,7 +92,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
             {
                 float jumpVelocity = Mathf.Clamp(averageUpwardHandVelocity, minJumpWithHandSpeed, maxJumpWithHandSpeed);
                 rb.AddForce(rb.transform.up * jumpHeight, ForceMode.Acceleration);
-                //rb.velocity = Vector3.up * (jumpVelocity * jumpHeight);
+                rb.velocity = Vector3.up * (jumpVelocity * jumpHeight);
             }
         }
     }

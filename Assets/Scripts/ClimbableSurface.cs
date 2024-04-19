@@ -18,9 +18,10 @@ public class ClimbableSurface : MonoBehaviour, IGrabbable
         return fixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
+    public GameObject Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         stored = false;
+        return gameObject;
     }
     
     // Start is called before the first frame update

@@ -53,7 +53,7 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
         return GrabbedFixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
+    public GameObject Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         Collider[] nearbyColliders = Physics.OverlapSphere(handsPosition, 0.2f, storageLayer);
         if (nearbyColliders.Length > 0 && nearbyColliders[0].CompareTag("BodyStorage"))
@@ -68,6 +68,8 @@ public class GrabAndStore : MonoBehaviour, IGrabbable, IStorable
             body.mass = 1;
             stored = false;
         }
+
+        return gameObject;
     }
     
 }

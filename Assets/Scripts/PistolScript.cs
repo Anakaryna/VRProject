@@ -69,7 +69,7 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable, IGun
         return GrabbedFixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
+    public GameObject Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         
         Collider[] nearbyColliders = Physics.OverlapSphere(handsPosition, 0.2f, storageLayer);
@@ -89,6 +89,8 @@ public class PistolScript : MonoBehaviour, IGrabbable, IStorable, IGun
             mybody.mass = 1;
             stored = false;
         }
+
+        return gameObject;
     }
     
     

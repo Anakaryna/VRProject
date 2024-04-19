@@ -55,10 +55,10 @@ public class SliceObject : MonoBehaviour
         collider.convex = true;
         rb.AddExplosionForce(cutForce, slicedObject.transform.position, 1);
 
-        MeshDestroy originalScript = original.GetComponent<MeshDestroy>();
+        MeshDestructor originalScript = original.GetComponent<MeshDestructor>();
         if (originalScript != null)
         {
-            MeshDestroy newScript = slicedObject.AddComponent<MeshDestroy>();
+            MeshDestructor newScript = slicedObject.AddComponent<MeshDestructor>();
         }
     }
 }

@@ -77,10 +77,13 @@ public class GrabPhysics : MonoBehaviour
 
             if(fixedJoint)
             {
-                grabedThing.Release(fixedJoint, transform.position, out bool stored);
+                var o = grabedThing.Release(fixedJoint, transform.position, out bool stored);
                 if (!stored)
                 {
-                    SceneManager.MoveGameObjectToScene(fixedJoint.connectedBody.gameObject, SceneManager.GetActiveScene());
+                    if (o.scene != SceneManager.GetActiveScene())
+                    {
+                        SceneManager.MoveGameObjectToScene(o, SceneManager.GetActiveScene());
+                    }
                 }
                 Destroy(fixedJoint);
             }

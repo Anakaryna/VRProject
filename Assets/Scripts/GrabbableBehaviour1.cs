@@ -32,11 +32,12 @@ public class GrabbableBehaviour1 : MonoBehaviour, IGrabbable
         return GrabbedFixedJoint;
     }
 
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
+    public GameObject Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored)
     {
         body.automaticCenterOfMass = true;
         body.excludeLayers = 0;
         body.mass = 1;
         stored = false;
+        return gameObject;
     }
 }

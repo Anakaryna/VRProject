@@ -32,7 +32,7 @@ public interface IGrabbable
 {
     public FixedJoint GrabbedFixedJoint { get; set; }
     public FixedJoint Grab(Rigidbody body, out bool makeTransfer);
-    public void Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored);
+    public GameObject Release(FixedJoint fixedJoint, Vector3 handsPosition, out bool stored);
 }
 
 public interface IStorable
